@@ -1,0 +1,62 @@
+
+.modal-dialog{
+    max-width:980px !important;
+}
+.modal-body{
+    padding:.5em !important;
+}
+.modal{
+    padding:0 !important;
+}
+p{
+    font-weight:700;
+}
+p, ul{
+    display:inline-block;
+    margin:0 !important;
+
+}
+span{
+    font-weight:400;
+}
+ul{
+    padding:0  !important;
+}
+ul li{
+    list-style:none;
+
+}
+.container{
+    display:flex;
+    padding:0 !important;
+    margin:0;
+    border:1px solid red;
+    min-width:100% !important;
+}
+
+.stats ul{
+    width:100%;
+    border:1px solid green;
+    
+
+}
+.stats li{
+    border:1px solid black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+}
+.abilities, .type, .eggs, .about>p{
+    background-color:white;
+
+    border:1px solid blue;
+
+}
+.abilities, .type, .eggs, .about, .stats, .evolution-chain{
+    background-color:white;
+    width:300px;
+}
+.abilities li, .type li, .eggs li{
+    display:inline-block;    
+    padding:0 0 0 .7em;
+}
