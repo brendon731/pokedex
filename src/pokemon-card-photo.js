@@ -40,8 +40,8 @@ export default function Thumb({name, children}){
                 {pokemon && pokemon.types.map(poke=>
                 <>
                     <span 
-                    className={poke.type.name}
-                    style={{padding:"0 5px"}}>{poke.type.name}</span>
+                    className={`type ${poke.type.name}`}
+                    >{poke.type.name}</span>
                 </>)}
             </div>
         </div>

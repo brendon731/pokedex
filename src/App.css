@@ -27,7 +27,6 @@ ul li{
 
 }
 .container{
-    display:flex;
     padding:0 !important;
     margin:0;
     border:1px solid red;
@@ -46,17 +45,22 @@ ul li{
     flex-direction: row;
     flex-wrap:wrap;
 }
-.abilities, .type, .eggs, .about>p{
+.abilities, .types, .eggs, .about>p{
     background-color:white;
 
     border:1px solid blue;
 
 }
-.abilities, .type, .eggs, .about, .stats, .evolution-chain{
-    background-color:white;
-    width:300px;
+.evolution-chain ul{
+    display:flex;
+    flex-wrap:wrap;
+    border:1px solid red;
 }
-.abilities li, .type li, .eggs li{
+.abilities, .types, .eggs, .about, .stats{
+    background-color:white;
+    max-width:300px;
+}
+.abilities li, .types li, .eggs li{
     display:inline-block;    
     padding:0 0 0 .7em;
 }

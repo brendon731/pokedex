@@ -1,7 +1,11 @@
 import {useEffect, useState} from "react"
+import Thumb from "./pokemon-card-photo.js"
 
+import {Link, useNavigate} from "react-router-dom"
 export default function EvolutionChain(props){
     const [pokemonChain, setPokemonChain] = useState([])
+    const [curPokemon, setCurPokemon] = useState("")
+    let navigate = useNavigate()
     //console.log(props)
     async function getPokemon(){
       //let teste = await fetch(props.url)
@@ -26,17 +30,30 @@ export default function EvolutionChain(props){
       //console.log(first, second, third, '========')
       setPokemonChain([first, second, third])
   },[])
+  
+   useEffect(()=>{console.log("iniciou")},[])
   useEffect(()=>{console.log(pokemonChain, "pokemooooon")},[pokemonChain])
 
   return(<>
   {pokemonChain.length && 
-  <div>
+  
     <ul>
     {pokemonChain.map(e=><>
-      <li>{e}</li>
+    
+      <li 
+      onClick={()=>navigate(`/${e}`)}
+      >
+
+        <div>
+          <Thumb name={e}>
+          <span className="type">{e}</span>
+          </Thumb>
+        </div>
+      </li>
+
     </>)}
     </ul>
-  </div>
+  
   }
   </>)
 

@@ -6,6 +6,9 @@ import "./App.css"
 import "./pokemon-colors.css"
 
 import Thumb from "./pokemon-card-photo.js"
+
+import {Link, Outlet} from "react-router-dom"
+
 function App() {
     const [show, setShow] = useState(false);
 
@@ -41,27 +44,25 @@ function App() {
     },[pokemon, show])
   return (
     <>  
+    <Outlet/>
     <div style={{display:"flex", flexWrap:"wrap", border:"2px solid blue"}}>
-      {show && 
-      <Example 
-        poke={pokemon}
-        clicked={()=>{handleShowModal()}}/>
-      }
       
+    
         {pokemonList.map(pokemon=>
         <>
+        <Link to={`/${pokemon.name}`}>
           <div 
             style={{border:"1px solid red",
             flexGrow:"1", 
             width:"150px"
            }}
-            onClick={()=>{handlePokemon(pokemon.name)}
-          }>
+          >
             <Thumb 
               {...pokemon}>
               <p>{pokemon.name}</p>
             </Thumb>
           </div>
+        </Link>
         </>
         )}
       </div>
