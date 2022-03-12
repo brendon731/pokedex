@@ -24,7 +24,6 @@ export default function Thumb({name, children}){
 
     return(
     <>
-    <div className={pokemon}>
 
         <img 
         style={{margin:"auto", display:"block"}}
@@ -45,7 +44,6 @@ export default function Thumb({name, children}){
                 </>)}
             </div>
         </div>
-    </div>
     
     </>)
 

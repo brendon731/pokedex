@@ -10,57 +10,113 @@
 }
 p{
     font-weight:700;
+    margin:0 !important;
 }
 p, ul{
     display:inline-block;
-    margin:0 !important;
-
 }
+h1{color:rgb(211, 211, 0)}
 span{
     font-weight:400;
 }
 ul{
     padding:0  !important;
+    margin:0 !important;
 }
 ul li{
     list-style:none;
+    display:inline-block;
+}
+.img{
+    grid-area:img;
+}
+.about{
+    grid-area:about;
+}
+.about p{
+    margin:5px 0;
+}
 
+.evolution-chain{
+    grid-area:evolution-chain;
+}
+.stats{
+    grid-area:stats;
+}
+.multiplier{
+    grid-area:multiplier;
+}
+.stats, .multiplier, .about,.evolution-chain, .img{
+    padding:5px 10px;
+    border:1px solid #000000;
+    max-width:400px;
+    width:320px;
+    flex-grow: 1;
+}
+
+.evolution-chain{
+    max-width:800px;
+    width:640px;
+
+    flex-grow: 1;
 }
 .container{
     padding:0 !important;
     margin:0;
-    border:1px solid red;
     min-width:100% !important;
+    display:flex;
+    flex-wrap:wrap;
+    /*
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+*/
+
+    grid-template-areas: 
+    "img stats multiplier"
+    "about evolution-chain evolution-chain"
+    ;
+    
 }
 
 .stats ul{
     width:100%;
-    border:1px solid green;
-    
-
 }
 .stats li{
-    border:1px solid black;
     display: flex;
     flex-direction: row;
     flex-wrap:wrap;
 }
-.abilities, .types, .eggs, .about>p{
-    background-color:white;
 
-    border:1px solid blue;
-
-}
 .evolution-chain ul{
     display:flex;
     flex-wrap:wrap;
-    border:1px solid red;
+    
+    justify-content: space-around;
 }
-.abilities, .types, .eggs, .about, .stats{
-    background-color:white;
-    max-width:300px;
-}
-.abilities li, .types li, .eggs li{
-    display:inline-block;    
+
+.abilities li, .eggs li{
+    display:inline-block;
     padding:0 0 0 .7em;
+}
+
+.abilities, .eggs, .types, .each-multiplier{
+    margin:5px 0;
+}
+.stats li{
+    margin:5px 0;
+
+}
+.each-multiplier, .abillities{
+    display:flex;
+}
+.each-multiplier li{
+    margin:0 0 5px 0;
+
+}
+
+label{
+    margin:0 15px 10px 5px;
+    font-size:16px;
+    font-weight:700;
 }

@@ -32,39 +32,31 @@ function App() {
       })()
     },[])
 
-    const handleShowModal = useCallback(()=>{
-      setShow(()=>!show)
-    },[show])
-
-    const handlePokemon = useCallback(evt=>{
-     // console.log(evt, 'evt')
-      setPokemon(evt)
-      setShow(()=>!show)
-
-    },[pokemon, show])
   return (
     <>  
     <Outlet/>
-    <div style={{display:"flex", flexWrap:"wrap", border:"2px solid blue"}}>
+    <div >
       
-    
+      <ul 
+      style={{display:"flex", 
+      flexWrap:"wrap", 
+      border:"2px solid blue"}}>
         {pokemonList.map(pokemon=>
         <>
-        <Link to={`/${pokemon.name}`}>
-          <div 
-            style={{border:"1px solid red",
-            flexGrow:"1", 
-            width:"150px"
-           }}
+          <li 
+            style={{border:"1px solid red", flexGrow:"1", width:"200px"}}
           >
+        <Link to={`/${pokemon.name}`}>
             <Thumb 
               {...pokemon}>
               <p>{pokemon.name}</p>
             </Thumb>
-          </div>
         </Link>
+          </li>
         </>
         )}
+      </ul>
+
       </div>
     </>
   );

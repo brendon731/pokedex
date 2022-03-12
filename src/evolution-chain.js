@@ -7,48 +7,50 @@ export default function EvolutionChain(props){
     const [curPokemon, setCurPokemon] = useState("")
     let navigate = useNavigate()
     //console.log(props)
+    let evoChain = []
+    function getEvolutionChain(chain) {
+      
+      evoChain.push(chain.species.name);
+      chain["evolves_to"].forEach(e => {
+        getEvolutionChain(e);
+      });
+      return evoChain;
+    }
+
     async function getPokemon(){
-      //let teste = await fetch(props.url)
-      //let teste1 = await teste.json()
-      //console.log("-----", teste1)
+     
       let teste2 = await fetch(props.url)
       let teste3 = await teste2.json()
-      return teste3
+      return getEvolutionChain(teste3.chain)
   }
 
   useEffect(async()=>{
-      let teste = await getPokemon()
-      let first = teste.chain.species.name
-      let second = 
-      teste.chain.evolves_to.length?
-      teste.chain.evolves_to[0].species.name:
-      undefined
-      let third = 
-      teste.chain.evolves_to[0].evolves_to.length?
-      teste.chain.evolves_to[0].evolves_to[0].species.name:
-      undefined
-      //console.log(first, second, third, '========')
-      setPokemonChain([first, second, third])
+      let chain = await getPokemon()
+      setPokemonChain(chain)
   },[])
   
    useEffect(()=>{console.log("iniciou")},[])
   useEffect(()=>{console.log(pokemonChain, "pokemooooon")},[pokemonChain])
 
   return(<>
+    <h4 style={{marginBottom:"20px"}}>Family</h4>
+
   {pokemonChain.length && 
-  
-    <ul>
+
+    <ul style={{margin:"20px"}}>
     {pokemonChain.map(e=><>
     
       <li 
       onClick={()=>navigate(`/${e}`)}
+      style={{
+        maxWidth:"150px", 
+        flexGrow:"1", 
+        border:'3px solid red',
+      height:"fit-content"}}
       >
-
-        <div>
           <Thumb name={e}>
           <span className="type">{e}</span>
           </Thumb>
-        </div>
       </li>
 
     </>)}

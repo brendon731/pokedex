@@ -104,14 +104,26 @@ export default function Example(props) {
       >
           {pokemon && 
           <>
-        <Modal.Header closeButton>
-          <Modal.Title id="example-custom-modal-styling-title">
+        <Modal.Header closeButton className={pokemon.color} 
+        style={{border:'none', padding:"5px 25px"}}>
+          <Modal.Title 
+          id="example-custom-modal-styling-title">
             {pokemon.name.length === 1?
-              pokemon.name[0]:
-
-              <select onChange={(evt)=>{getPokemonInfo(evt.target.value)}}>
+              <h2 
+              style={{
+              margin:"0",
+              WebkitTextStroke:"2px rgb(0, 0, 194)", 
+              fontWeight:"900",
+              color:`rgb(211, 211, 0)`,
+              textTransform:"uppercase"
+            }}
+              
+              >{pokemon.name[0]}</h2>:
+              <select
+              style={{backgroundColor:"black", color:"rgb(185, 185, 185)"}}
+               onChange={(evt)=>{getPokemonInfo(evt.target.value)}}>
                 {pokemon.name.map(e=><>
-                  <option>{e}</option>
+                  <option style={{textAlign:"center"}}>{e}</option>
                 </>)}
               </select>
               }
@@ -123,117 +135,144 @@ export default function Example(props) {
         >
           <div className="container">
 
-          <div >
-            <img 
-            src={pokemon.photo} 
-            style={{width:"100%", 
-            maxWidth:"250px",
-            margin:'auto', 
-            color: "lighten(100%)"
-            }}/>
-          </div>
-          <div className="body">
+            <div className="img" 
+            >
+              <img 
+              src={pokemon.photo} 
+              style={{
+              display:"block",
+              margin:"auto",
+              width:"100%",
+              maxWidth:'250px'
+              }}/>
+            </div>
+            <div className="stats">
+              <h4>Stats</h4>
 
-          <div className="about" style={{border:"1px solid black"}}>
-            <p style={{fontWeight:"normal"}}>{pokemon.text}</p>
-            <p>Weight: <span>{pokemon.weight}kg</span></p>
-            <p>Height: <span>{pokemon.height}m</span></p>
-            <p>Habitat: <span>{pokemon.habitat}</span></p>
-            <div className="abilities">
-              <p >Abilities:</p>
-              <ul>
-                {pokemon.abilities.map(e=>
-                  <li>{e.ability.name}</li>
-                )}
-              </ul>
-            </div>
-            <div className="eggs">
-              <p>Egg groups:</p>
-              <ul>
-                {pokemon.eggs.map(e=><li>{e.name}</li>)}
-              </ul>
-            </div>
-            <div className="types">
-              <p>Type:</p>
-              <ul>
-                {pokemon.types.map(type=><>
-                  <li>{type.type.name}</li>
+              <ul >
+                {pokemon.stats.map(e=><>
+                <li>
+                  <span style={{width:"120px"}}>{e.stat.name}</span>
+                    <ProgressBar 
+                    style={{ maxWidth:"350px", flexGrow:"1", alignSelf:"center"}}
+                    striped 
+                    animated
+                    variant="success" 
+                    now={getStats(e.base_stat)}
+                    label={e.base_stat}
+                    />
+                </li>
+
                 </>)}
               </ul>
             </div>
-          </div>
-          <div class="multiplier">
-            <input type="radio"
-            name="mesmo"
-            onChange={(evt=>{setRadioSelect("attack")})} 
-            checked={radioSelect === "attack"}
-            />
-            <input 
-            type="radio"
-            name="mesmo"
-            onChange={(evt=>{setRadioSelect("defense")})} 
-            checked={radioSelect === "defense"}
-            />
-            <div>
-
             
-              <div hidden={radioSelect === "defense"}>
-                {attack_and_defense.attack && 
-                attack_and_defense.attack.map(e=>
-                <>
-                <div>
+            <div class="multiplier">
+              <input
+              id="attack" 
+              type="radio"
+              name="mesmo"
+              onChange={(evt=>{setRadioSelect("attack")})} 
+              checked={radioSelect === "attack"}
+              />
+              <label htmlFor="attack">Attack</label>
+              <input 
+              id="defense"
+              type="radio"
+              name="mesmo"
+              onChange={(evt=>{setRadioSelect("defense")})} 
+              checked={radioSelect === "defense"}
+              />
+              <label htmlFor="defense">Defense</label>
 
-                  <span>{e[0]}</span>
-                  {e[1].map(type=>
-                  <span className={`type ${type}`}>{type}</span>
-                  )}
+              <div className="attackAndDefense">
+                <div hidden={radioSelect === "defense"}>
+                  {attack_and_defense.attack && 
+                  attack_and_defense.attack.map(e=>
+                  <>
+                  <div className="each-multiplier">
+                    <span>{e[0]}x</span>
+                    <ul>
+                        {e[1].map(type=>
+                        <li>
+                        <span 
+                        className={`type ${type}`}
+                        >
+                          {type}</span>
+                          </li>
+                        )}
+                    </ul>
                   </div>
-                  
-                  </>
-                )}
+                    
+                    </>
+                  )}
+                </div>
+                <div hidden={radioSelect === "attack"}>
+                  {attack_and_defense && 
+                  attack_and_defense.defense.map(e=>
+                  <>
+                  <div className="each-multiplier">
+                    <span>{e[0]}x</span>
+                    <ul>
+                        {e[1].map(type=>
+                      <li>
+                        <span className={`type ${type}`}>{type}</span>
+                      </li>
+                        )}
+                    </ul>
+                    </div>
+                    
+                    </>
+                  )}
+                </div>
               </div>
-              <div hidden={radioSelect === "attack"}>
-                {attack_and_defense && 
-                attack_and_defense.defense.map(e=>
-                <>
-                <div>
 
-                  <span>{e[0]}</span>
-                  {e[1].map(type=>
-                  <span className={`type ${type}`}>{type}</span>
+            </div>
+            <div className="about" >
+              <h3 style={{textAlign:"center",fontWeight:"normal", fontSize:"16px", margin:"0 0 15px 0"}}>{pokemon.text}</h3>
+              <div 
+              style={{display:"flex", 
+              justifyContent:"space-between",
+              padding:"5px 20px 5px 0"
+              }}>
+                <p >Weight: <span>{pokemon.weight}kg</span></p>
+                <p>Height: <span>{pokemon.height}m</span></p>
+              </div>
+                <p>Habitat: <span>{pokemon.habitat}</span></p>
+              <div className="abilities">
+                <p>Abilities:</p>
+                <ul>
+                  {pokemon.abilities.map(e=>
+                    <li>{e.ability.name}</li>
                   )}
-                  </div>
-                  
-                  </>
-                )}
+                </ul>
+              </div>
+              <div className="eggs">
+                <p>Egg groups:</p>
+                <ul>
+                  {pokemon.eggs.map(e=><li>{e.name}</li>)}
+                </ul>
+              </div>
+              <div className="types">
+                <p>Type:</p>
+                <ul >
+                    {pokemon.types.map(type=><>
+                    <li>
+                      <span className={`type ${type.type.name}`}>
+                        {type.type.name}
+                      </span>
+                    </li>
+                  </>)}
+                </ul>
               </div>
             </div>
-
+            
+            <div className="evolution-chain" 
+            
+            >
+              <EvolutionChain url={pokemon.chain} />
+            </div>
           </div>
-          <div className="stats">
-            <ul >
-              {pokemon.stats.map(e=><>
-              <li>
-                <span style={{width:"120px"}}>{e.stat.name}</span>
-                  <ProgressBar 
-                  style={{ maxWidth:"350px", flexGrow:"1", alignSelf:"center"}}
-                  striped 
-                  animated
-                  variant="success" 
-                  now={getStats(e.base_stat)}
-                  label={e.base_stat}
-                  />
-              </li>
-
-              </>)}
-            </ul>
-          </div>
-          
-          <div className="evolution-chain">
-            <EvolutionChain url={pokemon.chain} />
-          </div>
-        </div>
-      </div>
           
         </Modal.Body>
             </>}
