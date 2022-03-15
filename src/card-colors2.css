@@ -1,0 +1,54 @@
+.card-container .fire{
+    background-color:rgba(255, 157, 157, 0.788);
+}
+.card-container .water, .card-container .ice{
+    background-color:rgba(154, 198, 255, 0.767);
+}
+.card-container .grass, .card-container .bug{
+    background-color:rgba(169, 226, 169, 0.76);
+}
+.card-container .fighting, .card-container .rock{
+    background-color:rgba(197, 136, 136, 0.795);
+}
+.card-container .fairy{
+    background-color: rgb(250, 199, 207);
+}
+.card-container .poison, .card-container .psychic{
+    background-color: rgba(194, 121, 194, 0.856);
+}
+.card-container .normal{
+    background-color: rgb(185, 185, 185);
+}
+.card-container .ghost {
+    background-color: rgb(139, 89, 127);
+    color: white;
+  }
+.card-container .electric{
+    background-color: rgb(255, 255, 153);
+}
+.card-container .dark{
+    background-color: rgba(88, 88, 88, 0.877);
+    color:white;
+}
+
+.card-container .flying {
+    background-image: linear-gradient(
+      rgb(82, 177, 221) 50%,
+      rgb(180, 165, 165) 50%
+    );
+    color: black;
+  }
+.card-container .ground {
+    background-image: linear-gradient(
+      rgb(180, 209, 52) 50%,
+      rgb(158, 144, 144) 50%
+    );
+    color: black;
+  }
+.card-container .dragon {
+    background-image: linear-gradient(
+      rgb(62, 168, 218) 50%,
+      rgb(202, 113, 77) 50%
+    );
+    color: white;
+  }

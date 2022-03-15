@@ -1,12 +1,22 @@
 
+#root{
+    max-width:980px;
+    margin:auto;
+}
 .modal-dialog{
     max-width:980px !important;
+    margin-top:10px !important;
+
 }
 .modal-body{
     padding:.5em !important;
 }
 .modal{
     padding:0 !important;
+}
+a{
+    text-decoration: none !important;
+    color:black !important;
 }
 p{
     font-weight:700;
@@ -15,7 +25,6 @@ p{
 p, ul{
     display:inline-block;
 }
-h1{color:rgb(211, 211, 0)}
 span{
     font-weight:400;
 }
@@ -26,6 +35,7 @@ ul{
 ul li{
     list-style:none;
     display:inline-block;
+    
 }
 .img{
     grid-area:img;
@@ -48,7 +58,7 @@ ul li{
 }
 .stats, .multiplier, .about,.evolution-chain, .img{
     padding:5px 10px;
-    border:1px solid #000000;
+    border:1px solid #0000001f;
     max-width:400px;
     width:320px;
     flex-grow: 1;
@@ -56,7 +66,7 @@ ul li{
 
 .evolution-chain{
     max-width:800px;
-    width:640px;
+    width:642px;
 
     flex-grow: 1;
 }
@@ -65,18 +75,8 @@ ul li{
     margin:0;
     min-width:100% !important;
     display:flex;
+    justify-content: center;
     flex-wrap:wrap;
-    /*
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-*/
-
-    grid-template-areas: 
-    "img stats multiplier"
-    "about evolution-chain evolution-chain"
-    ;
-    
 }
 
 .stats ul{
@@ -104,8 +104,11 @@ ul li{
     margin:5px 0;
 }
 .stats li{
-    margin:5px 0;
+    margin:10px 0;
 
+}
+.about, .stats, .multiplier, .evolution-chain{
+    padding-top:15px;
 }
 .each-multiplier, .abillities{
     display:flex;
@@ -120,3 +123,31 @@ label{
     font-size:16px;
     font-weight:700;
 }
+.card-img{
+    padding:0 20px;
+}
+.each-card img{
+    border-radius:10px;
+}
+.each-card-chain img, .each-card img{
+    margin:auto;
+    width:100%;
+}
+.each-card-chain img{
+    border:5px solid rgb(236, 236, 236);
+    box-shadow:2px 2px 5px black, 2px 2px 10px black inset;
+    border-radius:100%;
+    padding:10px;
+}
+
+.card-a{
+    width:175px;
+    flex-grow:1;
+    margin:3px;
+}
+@media screen and (max-Width:375px){
+    .card-a{
+        width:150px;
+    }
+}
+

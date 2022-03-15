@@ -15,7 +15,8 @@ export default function Example(props) {
   //const [isContentLoaded, setIsContentLoaded] = useState(false)
   const [attack_and_defense, setAttack_and_defense] = useState(false)
   const [pokemon, setPokemon] = useState(false)
-  console.log(selectedPokemon, "Selected")
+  //console.log(selectedPokemon, "Selected")
+
   async function getp(poke){
       let teste = await fetch("https://pokeapi.co/api/v2/" + poke)
       let teste2 = await teste.json()
@@ -44,6 +45,7 @@ export default function Example(props) {
     .then(teste=>{
       getp(`pokemon-species/${teste.species.name}`).
         then(teste2=>{
+          console.log(teste2)
           setPokemon({ 
             name:teste2.varieties.map(e=>e.pokemon.name),
             photo:teste.sprites.other["official-artwork"].front_default,
@@ -55,7 +57,7 @@ export default function Example(props) {
             species:teste.species.url,
 
             eggs:teste2.egg_groups,
-            habitat:teste2.habitat.name,
+            habitat:teste2.habitat === null?"undefined":teste2.habitat.name,
             chain:teste2.evolution_chain.url,
             color:teste2.color.name,
             text:GetEnglishText(teste2.flavor_text_entries)
@@ -105,29 +107,8 @@ export default function Example(props) {
           {pokemon && 
           <>
         <Modal.Header closeButton className={pokemon.color} 
-        style={{border:'none', padding:"5px 25px"}}>
-          <Modal.Title 
-          id="example-custom-modal-styling-title">
-            {pokemon.name.length === 1?
-              <h2 
-              style={{
-              margin:"0",
-              WebkitTextStroke:"2px rgb(0, 0, 194)", 
-              fontWeight:"900",
-              color:`rgb(211, 211, 0)`,
-              textTransform:"uppercase"
-            }}
-              
-              >{pokemon.name[0]}</h2>:
-              <select
-              style={{backgroundColor:"black", color:"rgb(185, 185, 185)"}}
-               onChange={(evt)=>{getPokemonInfo(evt.target.value)}}>
-                {pokemon.name.map(e=><>
-                  <option style={{textAlign:"center"}}>{e}</option>
-                </>)}
-              </select>
-              }
-          </Modal.Title>
+        style={{border:'none', padding:"15px 15px 0"}}>
+          
         </Modal.Header>
         
         <Modal.Body 
@@ -137,13 +118,41 @@ export default function Example(props) {
 
             <div className="img" 
             >
+              {pokemon.name.length === 1?
+              <h2 
+              style={{
+              margin:"auto",
+              width:"fit-content",
+              WebkitTextStroke:"2px rgb(0, 0, 194)", 
+              fontWeight:"900",
+              color:`rgb(211, 211, 0)`,
+              textTransform:"uppercase",
+              letterSpacing:"1px"
+            }}
+              
+              >{pokemon.name[0]}</h2>:
+              <select
+
+              style={{backgroundColor:"black", 
+              margin:"auto",
+              display:"block",
+              fontSize:"18px",
+              textTransform:"capitalize",
+              color:"rgb(185, 185, 185)"}}
+               onChange={(evt)=>{getPokemonInfo(evt.target.value)}}>
+                {pokemon.name.map(e=><>
+                  <option style={{textAlign:"center"}}>{e}</option>
+                </>)}
+              </select>
+              }
               <img 
               src={pokemon.photo} 
               style={{
               display:"block",
               margin:"auto",
+              padding:"10px",
               width:"100%",
-              maxWidth:'250px'
+              maxWidth:"250px"
               }}/>
             </div>
             <div className="stats">
@@ -196,7 +205,7 @@ export default function Example(props) {
                         {e[1].map(type=>
                         <li>
                         <span 
-                        className={`type ${type}`}
+                        className={`type type-${type}`}
                         >
                           {type}</span>
                           </li>
@@ -216,7 +225,7 @@ export default function Example(props) {
                     <ul>
                         {e[1].map(type=>
                       <li>
-                        <span className={`type ${type}`}>{type}</span>
+                        <span className={`type type-${type}`}>{type}</span>
                       </li>
                         )}
                     </ul>
@@ -229,7 +238,12 @@ export default function Example(props) {
 
             </div>
             <div className="about" >
-              <h3 style={{textAlign:"center",fontWeight:"normal", fontSize:"16px", margin:"0 0 15px 0"}}>{pokemon.text}</h3>
+              <h3 style={{
+                textAlign:"center",
+                fontWeight:"normal", 
+                fontSize:"16px", 
+                margin:"0 0 20px 0"}}>{pokemon.text}
+              </h3>
               <div 
               style={{display:"flex", 
               justifyContent:"space-between",
@@ -238,7 +252,7 @@ export default function Example(props) {
                 <p >Weight: <span>{pokemon.weight}kg</span></p>
                 <p>Height: <span>{pokemon.height}m</span></p>
               </div>
-                <p>Habitat: <span>{pokemon.habitat}</span></p>
+              <p>Habitat: <span>{pokemon.habitat}</span></p>
               <div className="abilities">
                 <p>Abilities:</p>
                 <ul>
@@ -246,7 +260,7 @@ export default function Example(props) {
                     <li>{e.ability.name}</li>
                   )}
                 </ul>
-              </div>
+            </div>
               <div className="eggs">
                 <p>Egg groups:</p>
                 <ul>
@@ -258,7 +272,7 @@ export default function Example(props) {
                 <ul >
                     {pokemon.types.map(type=><>
                     <li>
-                      <span className={`type ${type.type.name}`}>
+                      <span className={`type type-${type.type.name}`}>
                         {type.type.name}
                       </span>
                     </li>

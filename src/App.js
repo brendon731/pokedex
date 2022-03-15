@@ -13,51 +13,75 @@ function App() {
     const [show, setShow] = useState(false);
 
     const [pokemon, setPokemon] = useState("")
-    const [pokemonList, setPokemonList] = useState([])
+    const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon?limit=100&offset=0")
+    const [pokemonList, setPokemonList] = useState(false)
 
-    /*async function getPokemon(pokemon){
-        let teste = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemon)
+    async function getPokemonList(url1){
+        let teste = await fetch(`${url1}`)
         let teste2 = await teste.json()
         return teste2
-    }*/
-    async function getPokemonList(){
-        let teste = await fetch("https://pokeapi.co/api/v2/pokemon")
-        let teste2 = await teste.json()
-        return teste2.results
     }
 
     useEffect(()=>{
       (async()=>{
-        setPokemonList(await getPokemonList())
+        setShow(false)
+        let teste = await getPokemonList(url)
+        if(pokemonList){
+          setPokemonList({
+            next:teste.next, 
+            results:[
+              ...pokemonList.results, 
+              ...teste.results]
+            })
+        }else{
+          setPokemonList(teste)
+        }
+        setTimeout(()=>{
+          setShow(true)
+        },1000)
       })()
-    },[])
+    },[url])
 
+    
   return (
-    <>  
+    <> 
+    {false && <>
+      <div style={{backgroundColor:"black",position:"absolute", height:"100px", width:"100%"}}>
+        <h1 style={{color:"white", position:"absolute"}}>loading........</h1>
+      </div>
+      </> }
     <Outlet/>
-    <div >
-      
-      <ul 
-      style={{display:"flex", 
-      flexWrap:"wrap", 
-      border:"2px solid blue"}}>
-        {pokemonList.map(pokemon=>
+    <div className="card-container" 
+      style={{display:"flex",
+      flexWrap:"wrap",
+      border:"1px solid black"
+    }}
+      >
+        {pokemonList &&
+        pokemonList.results.map(pokemon=>
         <>
-          <li 
-            style={{border:"1px solid red", flexGrow:"1", width:"200px"}}
-          >
-        <Link to={`/${pokemon.name}`}>
-            <Thumb 
-              {...pokemon}>
-              <p>{pokemon.name}</p>
-            </Thumb>
-        </Link>
-          </li>
+          <Link 
+          className="card-a"
+          to={`/${pokemon.name}`} 
+        >
+              <Thumb 
+                {...pokemon}>
+                <h4 
+                style={{margin:"10px auto 7px", 
+                width:"fit-content",
+                 fontSize:"20px",
+                 textTransform:"capitalize"}}>{pokemon.name}</h4>
+              </Thumb>
+          </Link>
         </>
-        )}
-      </ul>
+        )
+        
+        }
+     
 
       </div>
+      <button onClick={()=>setUrl(pokemonList.next)}>mais</button>
+
     </>
   );
 }

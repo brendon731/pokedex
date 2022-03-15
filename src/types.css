@@ -1,88 +1,96 @@
 .type{
-  border-radius:5px;
+  border-radius:10px;
   display:inline-block;
   padding:0 .5em;
   margin:0 5px;
+  font-size: 12px;
+  text-transform: capitalize;
+
+}
+.card-index .type{
   font-size: 14px;
 }
-.grass {
+.type-container .type{
+  margin:0 5px;
+}
+.type-grass {
     background-color: rgb(90, 211, 90);
     color: black;
   }
-  .fire {
+.type-fire {
     background-color: rgb(226, 120, 49);
     color: white;
   }
-  .poison {
+.type-poison {
     background-color: rgb(187, 88, 182);
     color: white;
   }
-  .water {
+.type-water {
     background-color: rgb(23, 92, 138);
     color: white;
   }
-  .bug {
+.type-bug {
     background-color: rgb(70, 131, 70);
     color: white;
   }
-  .normal {
+.type-normal {
     background-color: rgb(97, 96, 96);
     color: white;
   }
-  .electric {
+.type-electric {
     background-color: rgb(236, 224, 51);
     color: rgb(0, 0, 0);
   }
-  .fairy {
+.type-fairy {
     background-color: rgb(219, 141, 200);
     color: black;
   }
-  .fighting {
+.type-fighting {
     background-color: rgb(153, 95, 29);
     color: white;
   }
-  .psychic {
+.type-psychic {
     background-color: rgb(199, 98, 174);
     color: white;
   }
-  .rock {
+.type-rock {
     background-color: rgb(156, 135, 16);
     color: white;
   }
-  .ice {
+.type-ice {
     background-color: rgb(26, 111, 207);
     color: white;
   }
-  .steel {
+.type-steel {
     background-color: rgb(159, 185, 214);
     color: black;
   }
-  .ghost {
+.type-ghost {
     background-color: rgb(94, 54, 84);
     color: white;
   }
-  .flying {
+.type-flying {
     background-image: linear-gradient(
       rgb(82, 177, 221) 50%,
       rgb(180, 165, 165) 50%
     );
     color: black;
   }
-  .ground {
+.type-ground {
     background-image: linear-gradient(
       rgb(180, 209, 52) 50%,
       rgb(158, 144, 144) 50%
     );
     color: black;
   }
-  .dragon {
+.type-dragon {
     background-image: linear-gradient(
       rgb(62, 168, 218) 50%,
       rgb(202, 113, 77) 50%
     );
     color: white;
   }
-  .dark {
+.type-dark {
     background-color: rgb(66, 66, 66);
     color: white;
   }

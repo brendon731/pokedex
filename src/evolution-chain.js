@@ -5,9 +5,9 @@ import {Link, useNavigate} from "react-router-dom"
 export default function EvolutionChain(props){
     const [pokemonChain, setPokemonChain] = useState([])
     const [curPokemon, setCurPokemon] = useState("")
-    let navigate = useNavigate()
     //console.log(props)
     let evoChain = []
+
     function getEvolutionChain(chain) {
       
       evoChain.push(chain.species.name);
@@ -18,7 +18,6 @@ export default function EvolutionChain(props){
     }
 
     async function getPokemon(){
-     
       let teste2 = await fetch(props.url)
       let teste3 = await teste2.json()
       return getEvolutionChain(teste3.chain)
@@ -28,30 +27,29 @@ export default function EvolutionChain(props){
       let chain = await getPokemon()
       setPokemonChain(chain)
   },[])
-  
-   useEffect(()=>{console.log("iniciou")},[])
-  useEffect(()=>{console.log(pokemonChain, "pokemooooon")},[pokemonChain])
 
   return(<>
-    <h4 style={{marginBottom:"20px"}}>Family</h4>
+    <h4 style={{marginBottom:"15px"}}>Family</h4>
 
   {pokemonChain.length && 
 
-    <ul style={{margin:"20px"}}>
+    <ul style={{margin:"10px"}}
+      className="chain-list"
+    >
     {pokemonChain.map(e=><>
-    
+    <Link to={`/${e}`}>
       <li 
-      onClick={()=>navigate(`/${e}`)}
+      className="each-card-chain"
       style={{
-        maxWidth:"150px", 
+        maxWidth:"175px", 
         flexGrow:"1", 
-        border:'3px solid red',
-      height:"fit-content"}}
-      >
+        boxSizing:"border-box"}}
+        >
           <Thumb name={e}>
-          <span className="type">{e}</span>
+          <h6 style={{margin:"5px auto", width:"fit-content", textTransform:"capitalize"}}>{e}</h6>
           </Thumb>
       </li>
+        </Link>
 
     </>)}
     </ul>
