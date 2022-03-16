@@ -29,30 +29,21 @@ export default function EvolutionChain(props){
   },[])
 
   return(<>
-    <h4 style={{marginBottom:"15px"}}>Family</h4>
+    <h4 style={{marginBottom:"7px"}}>Family</h4>
 
   {pokemonChain.length && 
 
-    <ul style={{margin:"10px"}}
-      className="chain-list"
-    >
-    {pokemonChain.map(e=><>
-    <Link to={`/${e}`}>
-      <li 
-      className="each-card-chain"
-      style={{
-        maxWidth:"175px", 
-        flexGrow:"1", 
-        boxSizing:"border-box"}}
-        >
-          <Thumb name={e}>
-          <h6 style={{margin:"5px auto", width:"fit-content", textTransform:"capitalize"}}>{e}</h6>
-          </Thumb>
-      </li>
-        </Link>
+    <div  className="evolution-chain-container">
+      {pokemonChain.map(e=><>
+      <Link to={`/${e}`} className="each-card-chain" key={e+"evolution-chain"}>
+        <Thumb name={e}>
+        <h6 style={{margin:"3px auto 5px", width:"fit-content", textTransform:"capitalize"}}>{e}</h6>
+        </Thumb>
+    
+      </Link>
 
-    </>)}
-    </ul>
+      </>)}
+    </div>
   
   }
   </>)

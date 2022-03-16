@@ -10,12 +10,11 @@ import {useLocation, useParams, useNavigate} from "react-router-dom"
 export default function Example(props) {
   let navigate = useNavigate()
   console.log(useParams().pokemon)
-  let pokemonFromParam = useParams().pokemon
+  let pokemonFromParam = useParams().pokemon.toLowerCase()
   const [selectedPokemon, setSelectedPokemon] = useState(useParams().pokemon)
-  //const [isContentLoaded, setIsContentLoaded] = useState(false)
   const [attack_and_defense, setAttack_and_defense] = useState(false)
   const [pokemon, setPokemon] = useState(false)
-  //console.log(selectedPokemon, "Selected")
+  const [isPokemonFound, setIsPokemonFound] = useState(true)
 
   async function getp(poke){
       let teste = await fetch("https://pokeapi.co/api/v2/" + poke)
@@ -62,6 +61,7 @@ export default function Example(props) {
             color:teste2.color.name,
             text:GetEnglishText(teste2.flavor_text_entries)
           })
+          setIsPokemonFound(true)
         }).
         then(res=>{
           let types = teste.types.map(e=>e.type.name)
@@ -76,18 +76,19 @@ export default function Example(props) {
         })
         .catch(error=>{console.log(error, "deu error na f de dentro")})
     })
-    .catch(err=>{console.log(err, "deu error-------")})
+    .catch(err=>{
+      setIsPokemonFound(false) 
+    })
   }
   
   useEffect(()=>{
     getPokemonInfo(pokemonFromParam)
-    //console.log(selectedPokemon, "SELECTED")
     
   },[pokemonFromParam])
 
   useEffect(()=>{
-    console.log(attack_and_defense, "=-=-=-=-")
-  },[attack_and_defense])
+    console.log(isPokemonFound, "=-=-=-=-")
+  },[isPokemonFound])
   
 
   function getStats(stat){
@@ -97,7 +98,7 @@ export default function Example(props) {
   const [radioSelect, setRadioSelect] = useState("attack")
   return (
     <>
-     
+     {isPokemonFound?
       <Modal
         show={true}
         onHide={() => navigate("/")}
@@ -106,7 +107,8 @@ export default function Example(props) {
       >
           {pokemon && 
           <>
-        <Modal.Header closeButton className={pokemon.color} 
+        <Modal.Header closeButton 
+        className={pokemon.color} 
         style={{border:'none', padding:"15px 15px 0"}}>
           
         </Modal.Header>
@@ -114,9 +116,11 @@ export default function Example(props) {
         <Modal.Body 
         className={pokemon.color}
         >
+
           <div className="container">
 
             <div className="img" 
+            
             >
               {pokemon.name.length === 1?
               <h2 
@@ -146,14 +150,10 @@ export default function Example(props) {
               </select>
               }
               <img 
-              src={pokemon.photo} 
-              style={{
-              display:"block",
-              margin:"auto",
-              padding:"10px",
-              width:"100%",
-              maxWidth:"250px"
-              }}/>
+              alt={pokemon.photo}
+              src={pokemon.photo}
+              style={{maxWidth:"250px", margin:"auto",  display:"block"}}
+              />
             </div>
             <div className="stats">
               <h4>Stats</h4>
@@ -281,16 +281,28 @@ export default function Example(props) {
               </div>
             </div>
             
-            <div className="evolution-chain" 
-            
-            >
+            <div className="evolution-chain">
               <EvolutionChain url={pokemon.chain} />
             </div>
           </div>
+
           
         </Modal.Body>
+        
             </>}
+      </Modal >:
+      <Modal
+      show={true}
+      onHide={() => navigate("/")}
+      size="lg"
+      aria-labelledby="example-modal-sizes-title-lg">
+        <Modal.Header closeButton className="red" style={{border:"none"}}>
+          <h3>Pokemon {`"${pokemonFromParam}"`} not found</h3>
+        </Modal.Header>
+
+        
       </Modal>
+      }
     </>
   );
   }

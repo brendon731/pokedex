@@ -25,8 +25,8 @@ export default function Thumb({name, children}){
         {pokemon &&
         <>
         <div
+        key={pokemon.name+"pokemon-card-photo"}
         className={`each-card ${pokemon.types[0].type.name}`}
-        style={{padding:'10px', borderRadius:'5px'}}
         >
             <div className="card-img">
                 <img
@@ -37,10 +37,7 @@ export default function Thumb({name, children}){
             <div>
                 {children}
                 <div className="type-container" 
-                    style={{
-                    margin:"auto", 
-                    width:"fit-content"
-                    }}>
+                    >
                     {pokemon.types.map(poke=>
                     <>
                         <span 
