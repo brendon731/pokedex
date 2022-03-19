@@ -1,17 +1,16 @@
-import {useState, useEffect, useCallback} from "react"
+import {useState, useEffect} from "react"
 
-import {Modal, Button, ProgressBar} from 'react-bootstrap'
+import {Modal, ProgressBar} from 'react-bootstrap'
 import "./App.css"
 import "./pokemon-colors.css"
 import EvolutionChain from "./evolution-chain.js"
 import {getMultipliers} from "./teste.js"
-import {useLocation, useParams, useNavigate} from "react-router-dom"
-
+import {useParams, useNavigate} from "react-router-dom"
 export default function Example(props) {
   let navigate = useNavigate()
   console.log(useParams().pokemon)
   let pokemonFromParam = useParams().pokemon.toLowerCase()
-  const [selectedPokemon, setSelectedPokemon] = useState(useParams().pokemon)
+  //const [selectedPokemon, setSelectedPokemon] = useState(useParams().pokemon)
   const [attack_and_defense, setAttack_and_defense] = useState(false)
   const [pokemon, setPokemon] = useState(false)
   const [isPokemonFound, setIsPokemonFound] = useState(true)
@@ -46,7 +45,7 @@ export default function Example(props) {
         then(teste2=>{
           console.log(teste2)
           setPokemon({ 
-            name:teste2.varieties.map(e=>e.pokemon.name),
+            id:teste2.id,
             photo:teste.sprites.other["official-artwork"].front_default,
             weight:teste.weight / 10,
             height:teste.height / 10,
@@ -54,7 +53,8 @@ export default function Example(props) {
             abilities:teste.abilities,
             types:teste.types,
             species:teste.species.url,
-
+            
+            name:teste2.varieties.map(e=>e.pokemon.name),
             eggs:teste2.egg_groups,
             habitat:teste2.habitat === null?"undefined":teste2.habitat.name,
             chain:teste2.evolution_chain.url,
@@ -119,9 +119,7 @@ export default function Example(props) {
 
           <div className="container">
 
-            <div className="img" 
-            
-            >
+            <div className="img">
               {pokemon.name.length === 1?
               <h2 
               style={{
@@ -144,13 +142,13 @@ export default function Example(props) {
               textTransform:"capitalize",
               color:"rgb(185, 185, 185)"}}
                onChange={(evt)=>{getPokemonInfo(evt.target.value)}}>
-                {pokemon.name.map(e=><>
-                  <option style={{textAlign:"center"}}>{e}</option>
-                </>)}
+                {pokemon.name.map(e=>
+                  <option style={{textAlign:"center"}} key={e + "pokemon-variante"}>{e}</option>
+                )}
               </select>
               }
               <img 
-              alt={pokemon.photo}
+              alt={pokemon.name}
               src={pokemon.photo}
               style={{maxWidth:"250px", margin:"auto",  display:"block"}}
               />
@@ -159,8 +157,8 @@ export default function Example(props) {
               <h4>Stats</h4>
 
               <ul >
-                {pokemon.stats.map(e=><>
-                <li>
+                {pokemon.stats.map(e=>
+                <li key={e.stat.name + pokemon.name + "stat"}>
                   <span style={{width:"120px"}}>{e.stat.name}</span>
                     <ProgressBar 
                     style={{ maxWidth:"350px", flexGrow:"1", alignSelf:"center"}}
@@ -172,11 +170,11 @@ export default function Example(props) {
                     />
                 </li>
 
-                </>)}
+                )}
               </ul>
             </div>
             
-            <div class="multiplier">
+            <div className="multiplier">
               <input
               id="attack" 
               type="radio"
@@ -194,16 +192,17 @@ export default function Example(props) {
               />
               <label htmlFor="defense">Defense</label>
 
+
               <div className="attackAndDefense">
                 <div hidden={radioSelect === "defense"}>
                   {attack_and_defense.attack && 
                   attack_and_defense.attack.map(e=>
-                  <>
-                  <div className="each-multiplier">
+                  
+                  <div className="each-multiplier" key={e[0] + e[1][0] + "attack"}>
                     <span>{e[0]}x</span>
                     <ul>
                         {e[1].map(type=>
-                        <li>
+                        <li key={type + e[0]}>
                         <span 
                         className={`type type-${type}`}
                         >
@@ -213,25 +212,24 @@ export default function Example(props) {
                     </ul>
                   </div>
                     
-                    </>
+                    
                   )}
                 </div>
                 <div hidden={radioSelect === "attack"}>
                   {attack_and_defense && 
                   attack_and_defense.defense.map(e=>
-                  <>
-                  <div className="each-multiplier">
+                  
+                  <div className="each-multiplier" key={e[0] + e[1][0] + "defense"}>
                     <span>{e[0]}x</span>
                     <ul>
                         {e[1].map(type=>
-                      <li>
-                        <span className={`type type-${type}`}>{type}</span>
-                      </li>
+                          <li key={e[0] + type}>
+                            <span className={`type type-${type}`}>{type}</span>
+                          </li>
                         )}
                     </ul>
                     </div>
                     
-                    </>
                   )}
                 </div>
               </div>
@@ -257,26 +255,25 @@ export default function Example(props) {
                 <p>Abilities:</p>
                 <ul>
                   {pokemon.abilities.map(e=>
-                    <li>{e.ability.name}</li>
+                    <li key={pokemon.name[0] + e.ability.name}>{e.ability.name}</li>
                   )}
                 </ul>
             </div>
               <div className="eggs">
                 <p>Egg groups:</p>
                 <ul>
-                  {pokemon.eggs.map(e=><li>{e.name}</li>)}
+                  {pokemon.eggs.map(e=><li key={e.name + "egg"}>{e.name}</li>)}
                 </ul>
               </div>
               <div className="types">
                 <p>Type:</p>
-                <ul >
-                    {pokemon.types.map(type=><>
-                    <li>
+                <ul>
+                    {pokemon.types.map(type=>
+                    <li key={pokemon.name[0] + type.type.name}>
                       <span className={`type type-${type.type.name}`}>
                         {type.type.name}
                       </span>
-                    </li>
-                  </>)}
+                    </li>)}
                 </ul>
               </div>
             </div>
