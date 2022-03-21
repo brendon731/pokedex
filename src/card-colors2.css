@@ -10,6 +10,10 @@
 .card-container .fighting, .card-container .rock{
     background-color:rgba(197, 136, 136, 0.795);
 }
+.card-container .steel{
+  background-color: rgb(146, 175, 209);
+
+}
 .card-container .fairy{
     background-color: rgb(250, 199, 207);
 }

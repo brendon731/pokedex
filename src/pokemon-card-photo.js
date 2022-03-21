@@ -36,8 +36,11 @@ export default function Thumb({children, id}){
         <Link 
             className={`each-card ${pokemon.types[0].type.name}`}
             to={`/${pokemon.name}`} 
+            style={{position:"relative"}}
         >
-            <span>{pokemon.id}</span>
+            <span className="pokemon-id">
+                #{pokemon.id}
+            </span>
             <div className="card-img">
                 <img
                 src={pokemon.photo}
@@ -45,6 +48,7 @@ export default function Thumb({children, id}){
                 />
             </div>
             <div>
+
                 {children}
                 <div className="type-container" 
                     >

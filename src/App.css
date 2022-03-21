@@ -1,5 +1,26 @@
 
 body{
+    background-color:rgb(43, 43, 43) !important;
+}
+#root{
+    /*
+    background-image:url(".././public/pokemonwall.png");
+    background-attachment: fixed;
+    background-size:cover;
+    background-position:bottom;
+    */
+    background-image:url(".././public/pokemongroup500.png");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: auto;
+}
+
+.pokemon-id{
+    color:rgb(70, 70, 70);
+    font-weight: 500;
+    font-size: 14px;
+    line-height:.8em;
+    display:block;
 }
 #root{
     max-width:980px;
@@ -152,6 +173,9 @@ label{
     .evolution-chain-container .each-card{
         padding:5px;
     }
+    #root{
+        background-position: top center;
+    }
     
 }
 @media screen and (max-Width:375px){
@@ -164,16 +188,29 @@ label{
     }
 
 }
-
-#search{
-    background-color:red;
+#root{
+    border:2px solid green;
 }
-#search:focus{
+.input-container{
+    display:flex;
+    border:1px solid white;
+    
+    margin-top:300px;
+    margin-bottom:0;
+    width:fit-content;
+}
+.search-input{
+    background-color:red;
+    border:none;
+}
+.search-input:focus{
     background-color:green;
 
 }
-.search-input{
-    border:1px solid black;
+.search-button{
+    border:none;
+}
+.search{
     width:fit-content;
     position:relative;
 
@@ -190,12 +227,19 @@ label{
     display:block;
 }
 
-#search:focus~#search-history{
+.search-input:focus~#search-history{
     width:100%;
     height:250px;
     background-color:white;
     overflow-y:scroll;
 }
 
-
+.filter{
+    background-color:rgb(26, 26, 26);
+    font-size: 20px;
+    color:rgb(173, 173, 173);
+    padding:5px;
+    border-radius:5px;
+    border:none;
+}
 

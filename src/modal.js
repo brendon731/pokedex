@@ -61,7 +61,7 @@ export default function Example(props) {
             color:teste2.color.name,
             text:GetEnglishText(teste2.flavor_text_entries)
           })
-          setIsPokemonFound(true)
+            setIsPokemonFound(true)
         }).
         then(res=>{
           let types = teste.types.map(e=>e.type.name)
@@ -74,7 +74,10 @@ export default function Example(props) {
             defense:keys_defense.sort()
           })
         })
-        .catch(error=>{console.log(error, "deu error na f de dentro")})
+      
+      .catch(error=>{
+        setIsPokemonFound(false) 
+        console.log(error, "deu error na f de dentro") })
     })
     .catch(err=>{
       setIsPokemonFound(false) 
@@ -105,17 +108,17 @@ export default function Example(props) {
         size="lg"
         aria-labelledby="example-modal-sizes-title-lg"
       >
-          {pokemon && 
+          {pokemon &&
           <>
-        <Modal.Header closeButton 
-        className={pokemon.color} 
-        style={{border:'none', padding:"15px 15px 0"}}>
-          
-        </Modal.Header>
         
         <Modal.Body 
-        className={pokemon.color}
+        style={{backgroundImage:`url(pokemonwall.png)`, backgroundSize:"cover", backgroundColor:"black"}}
         >
+        <Modal.Header closeButton 
+        style={{border:'none', padding:"5px 5px 5px 0"}}
+        >
+          
+        </Modal.Header>
 
           <div className="container">
 
@@ -126,8 +129,8 @@ export default function Example(props) {
               margin:"auto",
               width:"fit-content",
               WebkitTextStroke:"2px rgb(0, 0, 194)", 
-              fontWeight:"900",
               color:`rgb(211, 211, 0)`,
+              fontWeight:"900",
               textTransform:"uppercase",
               letterSpacing:"1px"
             }}
@@ -240,12 +243,13 @@ export default function Example(props) {
                 textAlign:"center",
                 fontWeight:"normal", 
                 fontSize:"16px", 
+                padding:"0 3px",
                 margin:"0 0 20px 0"}}>{pokemon.text}
               </h3>
               <div 
               style={{display:"flex", 
               justifyContent:"space-between",
-              padding:"5px 20px 5px 0"
+              padding:"5px 5px 5px 0"
               }}>
                 <p >Weight: <span>{pokemon.weight}kg</span></p>
                 <p>Height: <span>{pokemon.height}m</span></p>
