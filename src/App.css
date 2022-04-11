@@ -161,6 +161,31 @@ label{
     */
 }
 
+@keyframes even{
+    0%{
+        transform:translateX(100%);
+    }
+    100%{
+        transform:translateX(0);
+    }
+}
+@keyframes odd{
+    0%{
+        transform:translateX(-100%);
+    }
+    100%{
+        transform:translateX(0);
+
+    }
+}
+.card-container .each-card:nth-child(odd){
+    animation:odd 750ms forwards;
+}
+.card-container .each-card:nth-child(even){
+    animation:even 750ms forwards;
+
+}
+
 .each-card{
     padding:10px;
 }
