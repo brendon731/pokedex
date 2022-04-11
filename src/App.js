@@ -1,4 +1,4 @@
-import getPokemon from "./getpokemon"
+//import getPokemon from "./getpokemon"
 import { useEffect, useState, useCallback } from "react";
 import Example from "./modal"
 import 'bootstrap/dist/css/bootstrap.min.css';
