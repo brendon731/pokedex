@@ -5,7 +5,7 @@
     background-color:rgba(154, 198, 255, 0.767);
 }
 .card-container .grass, .card-container .bug{
-    background-color:rgba(169, 226, 169, 0.76);
+    background-color:rgb(169, 226, 169);
 }
 .card-container .fighting, .card-container .rock{
     background-color:rgba(197, 136, 136, 0.795);

@@ -1,7 +1,23 @@
 
 body{
+    /*
     background-color:rgb(43, 43, 43) !important;
+    */
+    background-attachment: fixed;
+    background-image:linear-gradient(rgba(255, 0, 0, 0.096), rgba(54, 177, 43, 0.185));
     overflow-x:hidden;
+}
+fieldset{
+    border:1px solid white !important;
+}
+fieldset legend{
+    float:none;
+    width:auto;
+    margin:0 10px;
+    font-size:15px;
+}
+select{
+    font-size:16px;
 }
 #roo{
     /*
@@ -155,13 +171,19 @@ label{
     flex-grow:1;
     margin:3px;
     border-radius:5px;
-    /*
-    border:1px solid rgb(182, 182, 70);
-    border-bottom:3px solid rgb(182, 182, 70);
-    border-top:3px solid rgb(182, 182, 70);
-    */
+   
 }
-
+.card-container .card-title{
+    margin:10px auto 7px; 
+    width:fit-content;
+    font-size:20px;
+    text-transform:capitalize;
+}
+.card-container{
+    display:flex;
+    flex-wrap:wrap;
+    padding-top:75px;
+}
 @keyframes even{
     0%{
         transform:translateX(100%);
@@ -199,10 +221,10 @@ label{
     .evolution-chain-container .each-card{
         padding:5px;
     }
+    
     #root{
         background-position: top center;
     }
-    
 }
 @media screen and (max-Width:375px){
     .evolution-chain-container .each-card{
@@ -214,13 +236,51 @@ label{
     }
 
 }
+header{
+    display:flex;
+    flex-wrap:wrap;
+    padding:5px;
+    background-color:grey;
+    position:fixed;
+    z-index:2;
+}
+.input-container{
+    height:fit-content;
+    margin-bottom:5px;
+    align-self:end;
+    
+}
+.menu-icon{
+    display:none;
+    width:100vw;
+    
+
+}
 .filter-input{
     display:flex;
     flex-wrap:wrap;
-    padding:10px 0;
-    background-color:grey;
+    transition:.5s;
+    overflow:auto;
+    
 }
-
+@media screen and (max-width:768px){
+    .filter-input{
+       height:200px;
+    }
+    .closed{
+        height:0 !important;
+        overflow:hidden;
+     }
+     
+    .menu-icon{
+        display:block;
+    }
+}
+.fa-bars{
+    float:right;
+    font-size: 24px;
+    padding:10px;
+}
 
 .search-button, .search-input{
     padding:5px 7px;
@@ -230,10 +290,7 @@ label{
     border:none;
     outline:black;
 }
-.search-input:focus{
-    background-color:green;
-    
-}
+
 .search, .search-button{
     display:inline-block;
 }
@@ -255,22 +312,50 @@ label{
 }
 #search-history ul li{
     display:block;
+    padding:5px;
+    width:100%;
+    cursor:pointer;
+}
+
+  
+#search-history ul li:hover{
+    background-color:rgb(211, 211, 211);
 }
 
 .search-input:focus~#search-history{
     width:100%;
-    height:250px;
-    background-color:white;
+    height:fit-content;
+    max-height:250px;
+    background-color:black;
     overflow-y:scroll;
+    color:grey;
 }
+.search-input{
+    border-radius:5px 0 0 5px;
+    color:rgb(173, 173, 173);
+}
+.search-button{
+    border-radius:0 5px 5px 0;
+}
+#search-history::-webkit-scrollbar {
+    background: grey; 
+    width:10px;
+  }
+#search-history::-webkit-scrollbar-thumb {
+    background: rgb(61, 61, 61); 
+    border-radius:10px;
+  }
 
 .filter{
     background-color:rgb(26, 26, 26);
-    font-size: 18px;
     color:rgb(173, 173, 173);
     padding:5px;
     border-radius:5px;
     border:none;
 
 }
+select{
+    margin:5px;
+}
+
 

@@ -34,15 +34,14 @@ function App() {
 
     const [filtered, setFiltered] = useState("")
 
-    const [next, setNext] = useState("")
+    //const [next, setNext] = useState("")
     const [nextSliceArray, setNextSliceArray] = useState([0, 20])
     const [searching, setSearching] = useState("")
     const [filteredFromSearching, setFilteredFromSearching] = useState([])
     const [searched, setSearched] = useState(false)
     const baseUrl = "https://pokeapi.co/api/v2/"
-    //const lastIndex = "pokemon-species?limit=878&offset=20"
-    const [url, setUrl] = useState("pokemon-species?limit=100&offset=0")
     const [pokemonList, setPokemonList] = useState("")
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     async function getPokemonList(url1){
         let teste = await fetch(`${url1}`)
@@ -205,7 +204,7 @@ function App() {
         //setPokemonList(filteredFromSearching)
         console.log("aquiiiiiiiii", searched)
         GetOrdenation({pokemonArray:filteredFromSearching, search:true})
-        setNext(false)
+        //setNext(false)
         setNextSliceArray([0, 0])
       }else{
         setSearched(false)
@@ -251,101 +250,100 @@ function App() {
       setSearching("")
 
     },[filter1])
+
   return (
     <>
-    <div className="filter-input">
-      <div className="input-container" >
-        <div className="search">
-          <input 
-          type="text"
-          placeholder="Search for name or id"
-          className="search-input" 
-          value={searching} 
-          onKeyPress={(evt)=>{
-            if(evt.key==="Enter"){
-              handleSearch() 
-              evt.target.blur()
-            }}}
-          onChange={(evt)=>setSearching(evt.target.value)}/>
-          {searching &&
-          <div id="search-history">
-            <ul style={{width:"100%"}}>
-              {filteredFromSearching.map((e, index)=>
-              <li 
-              key={"search-history" + index}
-              onMouseDown={(evt)=>{
-                setSearching(e.name) 
-                }
-              }
-              style={{
-              border:"1px solid #0000001f", 
-              display:"block",
-              padding:"5px", 
-              width:"100%",
-              cursor:"pointer"
-              }}>{e.name}</li>)}  
-            </ul>
-          </div>}
-        </div>
-        <button onClick={handleSearch} className="search-button">
-          <i className="fas fa-search"></i>
-        </button>
+    <header>
+      <div className="menu-icon" onClick={()=>setIsMenuOpen(!isMenuOpen)}>
+        <i className="fas fa-bars"></i>
       </div>
-        <select
-          className="filter"
-          onChange={(evt)=>setOrderedByFilter(orderFilter[evt.target.value])}
-          >
-            <option defaultValue={"ordenated"} hidden>ordeneted by ...</option>
+      <div className={`filter-input ${!isMenuOpen?"closed":undefined}`}>
 
-          {Object.keys(orderFilter).map(e=>
-            <option key={e + "filters"}>{e}</option>
-            )}
-        </select>
-     
-      
-        
-        <select onChange={evt=>{setFilter1(evt.target.value)}} 
-          className="filter"
-          >
-          <option defaultValue={"filtered"} hidden>Filtered by...</option>
+        <div className="input-container" >
+          <div className="search">
+            <input 
+            type="text"
+            placeholder="Search for name or id"
+            className="search-input" 
+            value={searching} 
+            onKeyPress={(evt)=>{
+              if(evt.key==="Enter"){
+                handleSearch() 
+                evt.target.blur()
+              }}}
+            onChange={(evt)=>setSearching(evt.target.value)}/>
+            {searching &&
+            <div id="search-history">
+              <ul style={{width:"100%"}}>
+                {filteredFromSearching.map((e, index)=>
+                <li 
+                key={"search-history" + index}
+                onMouseDown={(evt)=>{
+                  setSearching(e.name) 
+                  }
+                }
+              >{e.name}</li>)}  
+              </ul>
+            </div>}
+          </div>
+          <button onClick={handleSearch} className="search-button">
+            <i className="fas fa-search"></i>
+          </button>
+        </div>
+        <div className="ordered">
+        <fieldset>
+            <legend>Ordered by...</legend>
+          <select
+            className="filter"
+            onChange={(evt)=>setOrderedByFilter(orderFilter[evt.target.value])}
+            >
+              {/*<option defaultValue={"ordenated"} hidden>ordered by ...</option>*/}
 
-          {Object.keys(filters).map(e=>
-            <option key={e + "filters"}>{e}</option>
-            )}
-        </select>
+            {Object.keys(orderFilter).map(e=>
+              <option key={e + "filters"}>{e}</option>
+              )}
+          </select>
+        </fieldset>
 
-        {filter2 &&
-          <select onChange={evt=>{setFiltered(evt.target.value)}}
-          className="filter"
-          >
-            <option defaultValue={"all"} hidden>select {filter1}</option>
-          {filter2.results.map(e=>
-            <option key={e.name + "filter2"}>{e.name}</option>
-            )}
-        </select>
-        }
+        </div>
+        <div className="filters-container">
+          <fieldset>
+            <legend>Filtered by...</legend>
+          <select onChange={evt=>{setFilter1(evt.target.value)}} 
+            className="filter"
+            >
+            <option defaultValue={"filtered"} hidden>Filtered by...</option>
 
-    </div>
+            {Object.keys(filters).map(e=>
+              <option key={e + "filters"}>{e}</option>
+              )}
+          </select>
+
+          {filter2 &&
+            <select onChange={evt=>{setFiltered(evt.target.value)}}
+            className="filter"
+            >
+              <option defaultValue={"all"} hidden>select {filter1}</option>
+            {filter2.results.map(e=>
+              <option key={e.name + "filter2"}>{e.name}</option>
+              )}
+          </select>
+          }
+          </fieldset>
+
+        </div>
+      </div>
+    </header>
 
     <Outlet/>
-    <div className="card-container" 
-      style={{display:"flex",
-      flexWrap:"wrap",
-      marginTop:"0"
-    }}
-      >
+    <div className="card-container">
         {pokemonList.length?
         pokemonList.map((pokemon, index)=>
           <Thumb 
             key={pokemon.url + "index" + pokemon.id}
             id={getId(pokemon.url || pokemon.id)}
             >
-            <h4 
-            style={{
-            margin:"10px auto 7px", 
-            width:"fit-content",
-            fontSize:"20px",
-            textTransform:"capitalize"}}>{pokemon.name}</h4>
+            <h4 className="card-title">{pokemon.name}</h4>
           </Thumb>
          
         ):<Alert variant="danger">Pokemon Not found</Alert>
