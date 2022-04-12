@@ -1,8 +1,9 @@
 
 body{
     background-color:rgb(43, 43, 43) !important;
+    overflow-x:hidden;
 }
-#root{
+#roo{
     /*
     background-image:url(".././public/pokemonwall.png");
     background-attachment: fixed;
@@ -213,32 +214,36 @@ label{
     }
 
 }
-#root{
-    border:2px solid green;
-}
-.input-container{
+.filter-input{
     display:flex;
-    border:1px solid white;
-    
-    margin-top:300px;
-    margin-bottom:0;
-    width:fit-content;
+    flex-wrap:wrap;
+    padding:10px 0;
+    background-color:grey;
+}
+
+
+.search-button, .search-input{
+    padding:5px 7px;
 }
 .search-input{
-    background-color:red;
+    background-color:rgb(5, 4, 4);
     border:none;
+    outline:black;
 }
 .search-input:focus{
     background-color:green;
+    
+}
+.search, .search-button{
+    display:inline-block;
+}
 
-}
-.search-button{
-    border:none;
-}
 .search{
     width:fit-content;
     position:relative;
-
+}
+.search-button{
+    border:none;
 }
 #search-history{
     height:0;
@@ -261,10 +266,11 @@ label{
 
 .filter{
     background-color:rgb(26, 26, 26);
-    font-size: 20px;
+    font-size: 18px;
     color:rgb(173, 173, 173);
     padding:5px;
     border-radius:5px;
     border:none;
+
 }
 
