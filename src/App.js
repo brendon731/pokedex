@@ -63,7 +63,7 @@ function App() {
         let x = a.name
         let y = b.name
         return x === y ? 0 : x > y ? 1: -1})
-        if(!filtered || filter1 === "all"){
+        if(!filtered ){
          if( search){
            return pokemonArray
          }else{
@@ -80,7 +80,7 @@ function App() {
         let x = a.name
         let y = b.name
         return x === y ? 0 : x > y ? -1: 1})
-        if(!filtered || filter1 === "all"){
+        if(!filtered ){
          if( search){
            return pokemonArray
          }else{
@@ -98,7 +98,7 @@ function App() {
         let x = +a.id || +getId(a.url)
         let y = +b.id || +getId(b.url)
         return x === y ? 0 : x > y ? 1: -1})
-        if(!filtered || filter1 === "all"){
+        if(!filtered ){
          if( search){
            return pokemonArray
          }else{
@@ -116,7 +116,7 @@ function App() {
         let x = +a.id || +getId(a.url)
         let y = +b.id || +getId(b.url)
         return x === y ? 0 : x > y ? -1: 1})
-        if(!filtered || filter1 === "all"){
+        if(!filtered ){
          if( search){
            return pokemonArray
          }else{
@@ -127,6 +127,7 @@ function App() {
         else{return pokemonArray}
   
     }
+    
     useEffect(()=>{
      
        if(nextSliceArray[0] !== 0){
@@ -202,13 +203,25 @@ function App() {
       if(searching){
         setSearched(true)
         //setPokemonList(filteredFromSearching)
-        console.log("aquiiiiiiiii", searched)
         GetOrdenation({pokemonArray:filteredFromSearching, search:true})
         //setNext(false)
         setNextSliceArray([0, 0])
       }else{
-        setSearched(false)
-        GetOrdenation({search:false})
+        if(filtered && filter1){
+          (async()=>{
+
+            setSearching("")
+            let teste = await getPokemonList(`${baseUrl}${filters[filter1]}/${filtered}`)
+            let pokes = teste.results || teste.pokemon_species || teste.pokemon.map(e=>e.pokemon)
+            GetOrdenation({pokemonArray:pokes})
+            //setNext(false)
+            setNextSliceArray([0, 0])
+          })()
+
+        }else{
+          setSearched(false)
+          GetOrdenation({search:false})
+        }
       }
       
     },[pokemonList, filteredFromSearching, nextSliceArray, searched])
@@ -254,6 +267,7 @@ function App() {
   return (
     <>
     <header>
+      <div className="header-container">
       <div className="menu-icon" onClick={()=>setIsMenuOpen(!isMenuOpen)}>
         <i className="fas fa-bars"></i>
       </div>
@@ -309,29 +323,30 @@ function App() {
         <div className="filters-container">
           <fieldset>
             <legend>Filtered by...</legend>
-          <select onChange={evt=>{setFilter1(evt.target.value)}} 
-            className="filter"
-            >
-            <option defaultValue={"filtered"} hidden>Filtered by...</option>
+            <select onChange={evt=>{setFilter1(evt.target.value)}} 
+              className="filter"
+              >
+              {/*<option defaultValue={"filtered"} hidden>Filtered by...</option>*/}
 
-            {Object.keys(filters).map(e=>
-              <option key={e + "filters"}>{e}</option>
-              )}
-          </select>
+              {Object.keys(filters).map(e=>
+                <option key={e + "filters"}>{e}</option>
+                )}
+            </select>
 
-          {filter2 &&
-            <select onChange={evt=>{setFiltered(evt.target.value)}}
-            className="filter"
-            >
-              <option defaultValue={"all"} hidden>select {filter1}</option>
-            {filter2.results.map(e=>
-              <option key={e.name + "filter2"}>{e.name}</option>
-              )}
-          </select>
-          }
+            {filter2 &&
+              <select onChange={evt=>{setFiltered(evt.target.value)}}
+              className="filter"
+              >
+                <option defaultValue={"all"} hidden>select {filter1}</option>
+              {filter2.results.map(e=>
+                <option key={e.name + "filter2"}>{e.name}</option>
+                )}
+            </select>
+            }
           </fieldset>
 
         </div>
+      </div>
       </div>
     </header>
 

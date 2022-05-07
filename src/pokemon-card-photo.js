@@ -41,14 +41,11 @@ export default function Thumb({children, id}){
             <span className="pokemon-id">
                 #{pokemon.id}
             </span>
-            <div className="card-img">
-                <img
-                src={pokemon.photo}
-                alt={pokemon.name}
-                />
-            </div>
-            <div>
+            <div className="card-img" 
+            style={{backgroundImage:`url(${pokemon.photo})`}}>
+                
 
+            </div>
                 {children}
                 <div className="type-container" 
                     >
@@ -59,7 +56,6 @@ export default function Thumb({children, id}){
                         >{poke.type.name}</span>
                     )}
                 </div>
-            </div>
         
         </Link>
         </>

@@ -29,7 +29,8 @@ select{
     background-image:url(".././public/pokemongroup500.png");
     background-repeat: no-repeat;
     background-position: right top;
-    background-size: auto;
+    background-size: 100vmin;
+    padding-top:400px;
 }
 
 .pokemon-id{
@@ -39,10 +40,14 @@ select{
     line-height:.8em;
     display:block;
 }
-#root{
+.card-container, .header-container{
     max-width:980px;
     margin:auto;
+    /*
+    border:1px solid green;
+    */
 }
+
 .modal-dialog{
     max-width:980px !important;
     margin-top:10px !important;
@@ -93,8 +98,6 @@ ul li{
     max-width:800px;
     width:640px;
     max-width:640px;
-
-
     flex-grow: 1;
 }
 .container{
@@ -159,8 +162,10 @@ label{
     border:5px solid rgb(236, 236, 236);
     box-shadow:2px 2px 5px black, 2px 2px 10px black inset;
     border-radius:100%;
-    padding:20px;
-    width:100%;
+    width:130px;
+    height:130px;
+
+    background-size: 75%;
 }
 .evolution-chain-container .each-card{
     max-width:150px;
@@ -215,7 +220,13 @@ label{
 .card-img{
     padding:0 20px;
     margin:auto;
+    height:150px;
+    width:100%;
+    background-position:center;
+    background-size:contain;
+    background-repeat:no-repeat;
 }
+
 
 @media screen and (max-width:410px){
     .evolution-chain-container .each-card{
@@ -234,15 +245,25 @@ label{
         width:130px;
 
     }
+    .card-container .card-img{
+        height:100px;
+    }
 
 }
 header{
+    /*
+    background-image:linear-gradient(rgba(0, 0, 0, 0.479), rgba(255, 255, 255, 0.479));
+    */
+    background-color:rgb(255, 96, 96);
+    width:100%;
+    z-index:2;
+    position:fixed;
+}
+.header-container{
+    
     display:flex;
     flex-wrap:wrap;
     padding:5px;
-    background-color:grey;
-    position:fixed;
-    z-index:2;
 }
 .input-container{
     height:fit-content;
@@ -260,12 +281,11 @@ header{
     display:flex;
     flex-wrap:wrap;
     transition:.5s;
-    overflow:auto;
     
 }
 @media screen and (max-width:768px){
     .filter-input{
-       height:200px;
+       height:fit-content;
     }
     .closed{
         height:0 !important;
@@ -357,5 +377,4 @@ header{
 select{
     margin:5px;
 }
-
 
