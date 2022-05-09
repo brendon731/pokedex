@@ -5,7 +5,7 @@ import "./card-colors2.css"
 
 import {Link} from "react-router-dom"
 
-export default function Thumb({children, id}){
+export default function Thumb({children, id, name}){
     const [pokemon, setPokemon] = useState(false)
     /*
     let poke = url.split("/")
@@ -47,6 +47,7 @@ export default function Thumb({children, id}){
 
             </div>
                 {children}
+                <h4>{name}</h4>
                 <div className="type-container" 
                     >
                     {pokemon.types.map(poke=>

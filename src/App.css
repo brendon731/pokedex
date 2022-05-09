@@ -5,6 +5,7 @@ body{
     */
     background-attachment: fixed;
     background-image:linear-gradient(rgba(255, 0, 0, 0.096), rgba(54, 177, 43, 0.185));
+
     overflow-x:hidden;
 }
 fieldset{
@@ -18,20 +19,9 @@ fieldset legend{
 }
 select{
     font-size:16px;
+    margin:5px;
 }
-#roo{
-    /*
-    background-image:url(".././public/pokemonwall.png");
-    background-attachment: fixed;
-    background-size:cover;
-    background-position:bottom;
-    */
-    background-image:url(".././public/pokemongroup500.png");
-    background-repeat: no-repeat;
-    background-position: right top;
-    background-size: 100vmin;
-    padding-top:400px;
-}
+
 
 .pokemon-id{
     color:rgb(70, 70, 70);
@@ -152,6 +142,7 @@ label{
     margin:auto;
     width:100%;
 }
+
 .evolution-chain-container{
     display:flex;
     flex-wrap:wrap;
@@ -171,6 +162,14 @@ label{
     max-width:150px;
 
 }
+.evolution-chain-container h4{
+    margin:3px auto 5px;
+    font-size:16px;
+    width:fit-content;
+    text-transform: capitalize;
+
+    
+}
 .card-container .each-card{
     width:175px;
     flex-grow:1;
@@ -178,7 +177,7 @@ label{
     border-radius:5px;
    
 }
-.card-container .card-title{
+.card-container h4{
     margin:10px auto 7px; 
     width:fit-content;
     font-size:20px;
@@ -187,7 +186,6 @@ label{
 .card-container{
     display:flex;
     flex-wrap:wrap;
-    padding-top:75px;
 }
 @keyframes even{
     0%{
@@ -209,9 +207,9 @@ label{
 .card-container .each-card:nth-child(odd){
     animation:odd 750ms forwards;
 }
+
 .card-container .each-card:nth-child(even){
     animation:even 750ms forwards;
-
 }
 
 .each-card{
@@ -225,12 +223,28 @@ label{
     background-position:center;
     background-size:contain;
     background-repeat:no-repeat;
+    animation:2s entering;
+    transition:1s;
+}
+
+@keyframes entering {
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+    
+}
+.card-container .each-card:hover{
+    transform:scale(1.02) !important;
 }
 
 
 @media screen and (max-width:410px){
     .evolution-chain-container .each-card{
         padding:5px;
+        margin:5px;
     }
     
     #root{
@@ -253,109 +267,129 @@ label{
 header{
     /*
     background-image:linear-gradient(rgba(0, 0, 0, 0.479), rgba(255, 255, 255, 0.479));
+    background-image:linear-gradient(rgb(255, 96, 96) 50%, black 30%, white 10%);
     */
-    background-color:rgb(255, 96, 96);
     width:100%;
     z-index:2;
-    position:fixed;
+    position: -webkit-sticky;
+    position:sticky;
+    top:0;
 }
-.header-container{
-    
-    display:flex;
-    flex-wrap:wrap;
-    padding:5px;
+ 
+.first-half{
+    background-color:rgb(219, 50, 50);
+    border-bottom:5px solid black;
+    position:relative;
 }
-.input-container{
-    height:fit-content;
-    margin-bottom:5px;
-    align-self:end;
-    
+
+.first-half span{
+    height:50px;
+    width:50px;
+    line-height:45px;
+    background-color:white;
+    border:5px solid black;
+    border-radius:100%;
+   
+    text-align: center;
+    display:block;
+    position:absolute;
+    left:50%;
+    bottom:0;
+    transform:translate(-50%, calc(50% + 5px));
+    z-index:10;
 }
-.menu-icon{
-    display:none;
-    width:100vw;
-    
+.animation-running{
+    animation:piscar 1s infinite linear;
 
 }
-.filter-input{
-    display:flex;
-    flex-wrap:wrap;
-    transition:.5s;
-    
+@keyframes piscar{
+    50%{
+        background-color:rgb(243, 243, 109);
+    box-shadow:2px 2px 20px yellow;
+
+    }
 }
+.first-half span:hover{
+    cursor:pointer;
+}
+
+.header-container{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    height:100%;
+    transition:.5s;
+}
+.first-half, .second-half{
+    height:50%;
+    padding:15px;
+}
+
+
+
 @media screen and (max-width:768px){
     .filter-input{
        height:fit-content;
     }
-    .closed{
-        height:0 !important;
-        overflow:hidden;
-     }
-     
-    .menu-icon{
-        display:block;
-    }
 }
 .fa-bars{
-    float:right;
     font-size: 24px;
-    padding:10px;
 }
 
-.search-button, .search-input{
+.search-button, .search input{
     padding:5px 7px;
-}
-.search-input{
-    background-color:rgb(5, 4, 4);
-    border:none;
-    outline:black;
-}
-
-.search, .search-button{
     display:inline-block;
 }
-
-.search{
-    width:fit-content;
-    position:relative;
+.search-input-and-button{
+    width:100%;
+    display:flex;
+    max-width: 300px;
 }
+.search{
+    display:inline-block;
+    position:relative;
+    flex-grow:1;
+}
+.search input{
+    border:none;
+    outline:black;
+    background-color: rgba(0, 0, 0, 0.178);
+    width:100%;
+}
+
+
 .search-button{
     border:none;
+    border-radius:0 5px 5px 0;
 }
+
 #search-history{
     height:0;
     transition:.2s;
     overflow:hidden;
     position:absolute;
+    width:100%;
     z-index:10;
+    
 
 }
 #search-history ul li{
     display:block;
     padding:5px;
-    width:100%;
     cursor:pointer;
 }
-
   
 #search-history ul li:hover{
     background-color:rgb(211, 211, 211);
 }
-
-.search-input:focus~#search-history{
+.search input:focus~#search-history{
     width:100%;
     height:fit-content;
     max-height:250px;
     background-color:black;
     overflow-y:scroll;
     color:grey;
-}
-.search-input{
-    border-radius:5px 0 0 5px;
-    color:rgb(173, 173, 173);
-}
-.search-button{
-    border-radius:0 5px 5px 0;
 }
 #search-history::-webkit-scrollbar {
     background: grey; 
@@ -365,16 +399,72 @@ header{
     background: rgb(61, 61, 61); 
     border-radius:10px;
   }
-
+ 
 .filter{
-    background-color:rgb(26, 26, 26);
-    color:rgb(173, 173, 173);
+    background-color:rgb(230, 230, 230);
+    color:rgb(0, 0, 0);
     padding:5px;
     border-radius:5px;
     border:none;
 
 }
-select{
-    margin:5px;
+
+
+.second-half{
+    background-color:white;
+
+}
+.ordered, .filters-container{
+    display:inline-block;
+}
+.ordered{
+    float:right;
+}
+.closed {
+    height:100px;
+
+}
+.fa-bars{
+    display:none;
 }
 
+.closed .fa-bars{
+    display:inline-block;
+
+}
+
+.closed .header-container{ 
+    height:0;
+    display:none;
+
+}
+
+
+@media screen and (max-width:550px){
+    .header-container{
+        justify-content: space-around;
+    }
+     .header-container{
+        padding:20px 0;
+
+    }
+    .first-half{
+        padding:0 0 10px 0;
+
+    }
+    .header-container .logo{
+        margin-bottom:10px;
+    }
+    
+    
+}
+.load-more{
+    margin:20px auto;
+    display:block;
+    padding:10px 15px;
+    background-color: red;
+    color:white;
+    text-transform: uppercase;
+    border:none;
+    border-radius:10px;
+}

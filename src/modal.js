@@ -10,7 +10,6 @@ export default function Example(props) {
   let navigate = useNavigate()
   console.log(useParams().pokemon)
   let pokemonFromParam = useParams().pokemon.toLowerCase()
-  //const [selectedPokemon, setSelectedPokemon] = useState(useParams().pokemon)
   const [attack_and_defense, setAttack_and_defense] = useState(false)
   const [pokemon, setPokemon] = useState(false)
   const [isPokemonFound, setIsPokemonFound] = useState(true)
@@ -25,19 +24,7 @@ export default function Example(props) {
       let text = param.filter(l=>l.language.name==="en").map(e=>e.flavor_text)
     return text[0]
   }
-  /*
-  function getTypes(types){
-    
-
-    let {attack, defense} = getMultipliers(["grass"])
-    let keys_attack = Object.entries(attack)
-    let keys_defense = Object.entries(defense)
-
-    setAttack_and_defense({
-      attack:keys_attack,
-      defense:keys_defense
-    })
-  }*/
+  
   function getPokemonInfo(poke){
     getp(`pokemon/${poke}`)
     .then(teste=>{
@@ -186,6 +173,7 @@ export default function Example(props) {
               checked={radioSelect === "attack"}
               />
               <label htmlFor="attack">Attack</label>
+              
               <input 
               id="defense"
               type="radio"

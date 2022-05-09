@@ -68,22 +68,6 @@ export function getMultipliers(tp) {
 }
 
 
-/*
-let {attack, defense} = getMultipliers(["grass", "poison"])
-let keys_attack = Object.entries(attack)
-let keys_defense = Object.entries(defense)
-console.log(keys_defense, keys_attack)
-
-console.log("--------")
-keys_attack.forEach(e=>{
-    console.log(e[0])
-    e[1].forEach(type=>{
-        console.log(type)
-    })
-    console.log("----------")
-})
-console.log(keys_attack.sort())
-*/
 
 
 

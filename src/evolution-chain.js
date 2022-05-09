@@ -4,8 +4,7 @@ import {Link} from "react-router-dom"
 
 export default function EvolutionChain(props){
     const [pokemonChain, setPokemonChain] = useState([])
-    //const [curPokemon, setCurPokemon] = useState("")
-    //console.log(props)
+    
     let evoChain = []
 
     function getEvolutionChain(chain) {
@@ -37,16 +36,16 @@ export default function EvolutionChain(props){
   return(<>
     <h4 style={{marginBottom:"7px"}}>Family</h4>
 
-  {pokemonChain.length && 
+    {pokemonChain.length && 
 
-    <div  className="evolution-chain-container">
-      {pokemonChain.map(e=>
-          <Thumb id={getId(e.url)} key={"evolution-chain" + e.url}>
-          <h6 style={{margin:"3px auto 5px", width:"fit-content", textTransform:"capitalize"}}>{e.name}</h6>
-          </Thumb>
-      
-      )}
-    </div>
+      <div  className="evolution-chain-container">
+        {pokemonChain.map(e=>
+            <Thumb id={getId(e.url)} key={"evolution-chain" + e.url} name={e.name}>
+            
+            </Thumb>
+        
+        )}
+      </div>
   
   }
   </>)
