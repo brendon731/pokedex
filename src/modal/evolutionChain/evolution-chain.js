@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
-import Thumb from "./pokemon-card-photo.js"
+import Thumb from "../../pokemon-card-photo.js"
 import {Link} from "react-router-dom"
-
+import "./styles.css"
 export default function EvolutionChain(props){
     const [pokemonChain, setPokemonChain] = useState([])
     
@@ -33,21 +33,25 @@ export default function EvolutionChain(props){
     return pokemonSelected
   }
 
-  return(<>
-    <h4 style={{marginBottom:"7px"}}>Family</h4>
+  return(
+    <div className="evolution-chain">
 
-    {pokemonChain.length && 
+      <h4 style={{marginBottom:"7px"}}>Family</h4>
 
-      <div  className="evolution-chain-container">
-        {pokemonChain.map(e=>
-            <Thumb id={getId(e.url)} key={"evolution-chain" + e.url} name={e.name}>
-            
-            </Thumb>
-        
-        )}
-      </div>
-  
-  }
-  </>)
+      {pokemonChain.length && 
+
+        <div  className="evolution-chain-container">
+          {pokemonChain.map(e=>
+              <Thumb id={getId(e.url)} key={"evolution-chain" + e.url} name={e.name}>
+              
+              </Thumb>
+          
+          )}
+        </div>
+    
+    }
+    </div>
+
+  )
 
 }

@@ -1,0 +1,17 @@
+
+.about__text{
+    text-align:center;
+    display:block;
+}
+.about p{
+    padding:5px 0;
+}
+.about li{
+    display:inline-block;
+}
+.about ul{
+    display:inline-block;
+}
+.about li {
+    padding:2px 5px;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import Example from "./modal.js"
+import Example from "./modal/modal.js"
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
 ReactDOM.render(
   <React.StrictMode>

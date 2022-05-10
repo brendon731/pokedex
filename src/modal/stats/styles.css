@@ -1,0 +1,14 @@
+
+.stats__list{
+    width:100%;
+}
+
+.stats__item{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    margin:10px 0;
+}
+.stats__name{
+    width:120px;
+}

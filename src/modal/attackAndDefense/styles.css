@@ -1,0 +1,11 @@
+.multipliers{
+    padding-top:15px;
+}
+.multipliers__each__multiplier{
+    margin:5px 0;
+    display:flex;
+}
+.multiplier__each__type{
+    margin:0 0 5px 0;
+
+}
