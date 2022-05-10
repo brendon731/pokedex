@@ -249,7 +249,7 @@ function App() {
             evt.target.classList.remove("animation-running")
             
             }}>
-          <i className="fas fa-bars"></i> 
+          <i className="fa fa-bars"></i> 
           </span>
           <div className="header-container">
 
@@ -281,7 +281,7 @@ function App() {
                 </div>}
               </div>
               <button onClick={handleSearch} className="search-button">
-              <i className="fas fa-search"></i>
+              <i className="fa fa-search"></i>
               </button>
             </div>
 
