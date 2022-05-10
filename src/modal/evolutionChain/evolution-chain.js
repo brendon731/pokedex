@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react"
-import Thumb from "../../pokemon-card-photo.js"
+import Thumb from "../../cards/pokemon-card.js"
 import {Link} from "react-router-dom"
 import "./styles.css"
 export default function EvolutionChain(props){

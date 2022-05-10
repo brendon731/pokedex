@@ -1,6 +1,10 @@
 .multipliers{
-    padding-top:15px;
+    padding:15px 10px;
+    border:1px solid #0000001f;
+    max-width:400px;
+    width:320px;
 }
+
 .multipliers__each__multiplier{
     margin:5px 0;
     display:flex;

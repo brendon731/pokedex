@@ -1,0 +1,19 @@
+.modal-dialog{
+    max-width:980px !important;
+    margin-top:10px !important;
+
+}
+.modal-body{
+    padding:.5em !important;
+}
+.modal{
+    padding:0 !important;
+}
+.modal__container{
+    padding:0 !important;
+    margin:0;
+    min-width:100% !important;
+    display:flex;
+    justify-content: center;
+    flex-wrap:wrap;
+}

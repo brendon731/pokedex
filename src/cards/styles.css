@@ -1,0 +1,80 @@
+
+.card-container .card{
+    width:175px;
+    flex-grow:1;
+    margin:3px;
+    border-radius:5px;
+   
+}
+.card{
+    padding:10px;
+    border:none;
+}
+.card-container .card h4{
+    margin:10px auto 7px; 
+    width:fit-content;
+    font-size:20px;
+    text-transform:capitalize;
+}
+
+@keyframes even{
+    0%{
+        transform:translateX(100%);
+    }
+    100%{
+        transform:translateX(0);
+    }
+}
+@keyframes odd{
+    0%{
+        transform:translateX(-100%);
+    }
+    100%{
+        transform:translateX(0);
+
+    }
+}
+.card-container .card:nth-child(odd){
+    animation:odd 750ms forwards;
+}
+
+.card-container .card:nth-child(even){
+    animation:even 750ms forwards;
+}
+
+
+.card-img{
+    padding:0 20px;
+    margin:auto;
+    height:150px;
+    width:100%;
+    background-position:center;
+    background-size:contain;
+    background-repeat:no-repeat;
+    animation:2s entering;
+    transition:1s;
+}
+@keyframes entering {
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+    
+}
+.card-container .card:hover{
+    transform:scale(1.02) !important;
+}
+
+@media screen and (max-Width:375px){
+    
+    .card-container .card{
+        width:130px;
+
+    }
+    .card-container .card-img{
+        height:100px;
+    }
+
+}

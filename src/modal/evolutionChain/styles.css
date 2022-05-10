@@ -1,8 +1,11 @@
 .evolution-chain{
-    max-width:800px;
     width:640px;
     max-width:640px;
     flex-grow: 1;
+
+    padding:5px 10px;
+    border:1px solid #0000001f;
+    
 }
 .evolution-chain-container{
     display:flex;
@@ -19,8 +22,9 @@
 
     background-size: 75%;
 }
-.evolution-chain-container .each-card{
+.evolution-chain-container .card{
     max-width:150px;
+    background-color: transparent;
 
 }
 

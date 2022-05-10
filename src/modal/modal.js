@@ -1,8 +1,7 @@
 import {useState, useEffect} from "react"
 
 import {Modal} from 'react-bootstrap'
-import ".././App.css"
-import ".././pokemon-colors.css"
+import "./modal.css"
 import EvolutionChain from "./evolutionChain/evolution-chain.js"
 import {getMultipliers} from "../teste.js"
 import PhotoAndName from "./photoAndName/photoAndName.js"
@@ -11,9 +10,11 @@ import AttackAndDefense from "./attackAndDefense/attackAndDefense.js"
 import About from "./about/about.js"
 
 import {useParams, useNavigate} from "react-router-dom"
-export default function Example(props) {
+export default function Example() {
+
   let navigate = useNavigate()
   let pokemonFromParam = useParams().pokemon.toLowerCase()
+
   const [attack_and_defense, setAttack_and_defense] = useState(false)
   const [pokemon, setPokemon] = useState(false)
   const [isPokemonFound, setIsPokemonFound] = useState(true)
@@ -79,13 +80,6 @@ export default function Example(props) {
     getPokemonInfo(pokemonFromParam)
     
   },[pokemonFromParam])
-
-  useEffect(()=>{
-    console.log(isPokemonFound, "=-=-=-=-")
-  },[isPokemonFound])
-  
-
-  
   
   return (
     <>
@@ -107,8 +101,7 @@ export default function Example(props) {
         >
           
         </Modal.Header>
-
-          <div className="container">
+          <div className="modal__container">
             <PhotoAndName 
             name={pokemon.name}
             photo={pokemon.photo}
@@ -117,13 +110,10 @@ export default function Example(props) {
             <Stats stats={pokemon.stats}/>
             
             <AttackAndDefense {...attack_and_defense}/>
-           <About {...pokemon}/>
+            <About {...pokemon}/>
 
-              <EvolutionChain url={pokemon.chain} />
-            
-          </div>
-
-          
+            <EvolutionChain url={pokemon.chain} />
+          </div> 
         </Modal.Body>
         
             </>}

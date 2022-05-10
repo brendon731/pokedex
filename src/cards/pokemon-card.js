@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
-import "./types.css"
-import "./pokemon-colors.css"
-import "./card-colors2.css"
+import "./../types.css"
+//import "./pokemon-colors.css"
+import "./../card-colors2.css"
+import "./styles.css"
+
 
 import {Link} from "react-router-dom"
 
@@ -34,18 +36,14 @@ export default function Thumb({children, id, name}){
         {pokemon &&
         <>
         <Link 
-            className={`each-card ${pokemon.types[0].type.name}`}
+            className={`card ${pokemon.types[0].type.name}`}
             to={`/${pokemon.name}`} 
             style={{position:"relative"}}
         >
             <span className="pokemon-id">
                 #{pokemon.id}
             </span>
-            <div className="card-img" 
-            style={{backgroundImage:`url(${pokemon.photo})`}}>
-                
-
-            </div>
+            <div className="card-img" style={{backgroundImage:`url(${pokemon.photo})`}}></div>
                 {children}
                 <h4>{name}</h4>
                 <div className="type-container" 

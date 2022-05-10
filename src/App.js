@@ -1,18 +1,15 @@
 import { useEffect, useState, useCallback } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"
-import "./pokemon-colors.css"
-
 import {pokemons} from "./pokemonnames.js"
 import Alert from "react-bootstrap/Alert"
 
-import Thumb from "./pokemon-card-photo.js"
+import Thumb from "./cards/pokemon-card.js"
 
 import {Outlet} from "react-router-dom"
 
 
 function App() {
-  console.log("-----------")
   const orderFilter = {
     "Lowest to Highest number":"L-H",
     "Highest to lowest number":"H-L",
@@ -157,10 +154,6 @@ function App() {
           break
       }
     }
-    
-    
-    useEffect(()=>{console.log(pokemonList, "-------pokelist-------")},[pokemonList])
-
     useEffect(()=>{
         (async()=>{
           if(filtered){
@@ -348,7 +341,7 @@ function App() {
     <div className="card-container">
 
         {pokemonList.length?
-        pokemonList.map((pokemon, index)=>
+        pokemonList.map(pokemon=>
           <Thumb 
             key={pokemon.url + "index" + pokemon.id}
             id={getId(pokemon.url || pokemon.id)}
