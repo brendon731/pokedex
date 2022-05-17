@@ -346,8 +346,7 @@ function App() {
             key={pokemon.url + "index" + pokemon.id}
             id={getId(pokemon.url || pokemon.id)}
             name={pokemon.name}
-            >
-          </Thumb>
+            />
          
         ):<Alert variant="danger">Pokemon Not found</Alert>
         }

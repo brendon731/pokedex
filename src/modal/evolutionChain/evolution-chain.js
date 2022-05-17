@@ -42,9 +42,7 @@ export default function EvolutionChain(props){
 
         <div  className="evolution-chain-container">
           {pokemonChain.map(e=>
-              <Thumb id={getId(e.url)} key={"evolution-chain" + e.url} name={e.name}>
-              
-              </Thumb>
+              <Thumb id={getId(e.url)} key={"evolution-chain" + e.url} name={e.name}/>
           
           )}
         </div>

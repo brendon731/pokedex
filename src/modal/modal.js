@@ -20,10 +20,10 @@ export default function Example() {
   const [isPokemonFound, setIsPokemonFound] = useState(true)
 
   async function getp(poke){
-      let teste = await fetch("https://pokeapi.co/api/v2/" + poke)
-      let teste2 = await teste.json()
+      let res = await fetch("https://pokeapi.co/api/v2/" + poke)
+      let resJson = await res.json()
 
-      return teste2
+      return resJson
     }
   function GetEnglishText(param){
       let text = param.filter(l=>l.language.name==="en").map(e=>e.flavor_text)
@@ -32,35 +32,33 @@ export default function Example() {
   
   function getPokemonInfo(poke){
     getp(`pokemon/${poke}`)
-    .then(teste=>{
-      getp(`pokemon-species/${teste.species.name}`).
-        then(teste2=>{
-          console.log(teste2)
+    .then(pokemonFetched=>{
+      getp(`pokemon-species/${pokemonFetched.species.name}`).
+        then(pokemonFromSpecies=>{
           setPokemon({ 
-            id:teste2.id,
-            photo:teste.sprites.other["official-artwork"].front_default,
-            weight:teste.weight / 10,
-            height:teste.height / 10,
-            stats:teste.stats,
-            abilities:teste.abilities,
-            types:teste.types,
-            species:teste.species.url,
+            photo:pokemonFetched.sprites.other["official-artwork"].front_default,
+            weight:pokemonFetched.weight / 10,
+            height:pokemonFetched.height / 10,
+            stats:pokemonFetched.stats,
+            abilities:pokemonFetched.abilities,
+            types:pokemonFetched.types,
+            species:pokemonFetched.species.url,
             
-            name:teste2.varieties.map(e=>e.pokemon.name),
-            eggs:teste2.egg_groups,
-            habitat:teste2.habitat === null?"undefined":teste2.habitat.name,
-            chain:teste2.evolution_chain.url,
-            color:teste2.color.name,
-            text:GetEnglishText(teste2.flavor_text_entries)
+            id:pokemonFromSpecies.id,
+            name:pokemonFromSpecies.varieties.map(e=>e.pokemon.name),
+            eggs:pokemonFromSpecies.egg_groups,
+            habitat:pokemonFromSpecies.habitat === null?"undefined":pokemonFromSpecies.habitat.name,
+            chain:pokemonFromSpecies.evolution_chain.url,
+            color:pokemonFromSpecies.color.name,
+            text:GetEnglishText(pokemonFromSpecies.flavor_text_entries)
           })
             setIsPokemonFound(true)
         }).
         then(res=>{
-          let types = teste.types.map(e=>e.type.name)
+          let types = pokemonFetched.types.map(e=>e.type.name)
           let {attack, defense} = getMultipliers(types)
           let keys_attack = Object.entries(attack)
           let keys_defense = Object.entries(defense)
-          console.log(keys_attack, keys_defense)
           setAttack_and_defense({
             attack:keys_attack.sort(),
             defense:keys_defense.sort()
@@ -69,7 +67,7 @@ export default function Example() {
       
       .catch(error=>{
         setIsPokemonFound(false) 
-        console.log(error, "deu error na f de dentro") })
+        console.log(error) })
     })
     .catch(err=>{
       setIsPokemonFound(false) 
