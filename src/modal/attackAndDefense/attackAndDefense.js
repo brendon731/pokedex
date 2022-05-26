@@ -1,8 +1,22 @@
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import "./styles.css"
+import {getMultipliers} from "../../teste.js"
 
 
-export default function  AttackAndDefense({attack, defense}){
+export default function  AttackAndDefense(props){
+  const [attack_and_defense, setAttack_and_defense] = useState(false)
+    useEffect(()=>{
+        let typesNames = props.types.map(e=>e.type.name)
+        let {attack, defense} = getMultipliers(typesNames)
+        let keys_attack = Object.entries(attack)
+        let keys_defense = Object.entries(defense)
+        setAttack_and_defense({
+            attack:keys_attack.sort(),
+            defense:keys_defense.sort()
+        })
+    },[])
+    
+
   const [radioSelect, setRadioSelect] = useState("attack")
 
     function multipliers(e){
@@ -34,14 +48,15 @@ export default function  AttackAndDefense({attack, defense}){
     <div className="multipliers">
         
         {multipliersInput("attack")}
+
         {multipliersInput("defense")}
 
         <div className="attackAndDefense">
             <div hidden={radioSelect === "defense"}>
-                {attack && attack.map(e=>multipliers(e))}
+                {attack_and_defense.attack && attack_and_defense.attack.map(e=>multipliers(e))}
             </div>
             <div hidden={radioSelect === "attack"}>
-                {defense && defense.map(e=>multipliers(e))}
+                {attack_and_defense.defense && attack_and_defense.defense.map(e=>multipliers(e))}
             </div>
         </div>
 

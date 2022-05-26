@@ -7,20 +7,16 @@ import "./styles.css"
 
 import {Link} from "react-router-dom"
 
-export default function Thumb({children, id, name}){
+async function getPokemon(pokemon){
+    let teste = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemon)
+    let teste2 = await teste.json()
+    return teste2
+}
+export default function Thumb({id, name}){
     const [pokemon, setPokemon] = useState(false)
-    /*
-    let poke = url.split("/")
-    let pokemonSelected = poke[poke.length - 2]
-    */
-    async function getPokemon(pokemon){
-        let teste = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemon)
-        let teste2 = await teste.json()
-        return teste2
-    }
+   
     useEffect(async()=>{
         let teste = await getPokemon(id)
-        //let teste2 = await teste.json()
         setPokemon({
             is_front:true,
             id:teste.id,

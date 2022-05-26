@@ -8,233 +8,230 @@ import Thumb from "./cards/pokemon-card.js"
 
 import {Outlet} from "react-router-dom"
 
-
-function App() {
-  const orderFilter = {
-    "Lowest to Highest number":"L-H",
-    "Highest to lowest number":"H-L",
-      "A-Z":"A-Z",
-      "Z-A":"Z-A"
+const orderFilter = {
+  "Lowest to Highest number":"L-H",
+  "Highest to lowest number":"H-L",
+    "A-Z":"A-Z",
+    "Z-A":"Z-A"
+}
+  const filters = {
+    all:"pokemon-species",
+    shape:"pokemon-shape",
+    habitat:"pokemon-habitat",
+    type:"type",
+    generation:"generation"
   }
-    const filters = {
-      all:"pokemon-species",
-      shape:"pokemon-shape",
-      habitat:"pokemon-habitat",
-      type:"type",
-      generation:"generation"
-    }
-    
-    const [filter1, setFilter1]= useState("all")
-    const [filter2, setFilter2]= useState(false)
-    const [orderedByFilter, setOrderedByFilter] = useState("L-H")
 
-    const [filtered, setFiltered] = useState("")
-
-    const [nextSliceArray, setNextSliceArray] = useState([0, 20])
-    const [searching, setSearching] = useState("")
-    const [filteredFromSearching, setFilteredFromSearching] = useState([])
-    const [searched, setSearched] = useState(false)
-    const baseUrl = "https://pokeapi.co/api/v2/"
-    const [pokemonList, setPokemonList] = useState("")
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
-
-    async function getPokemonList(url1){
-        let teste = await fetch(`${url1}`)
-        let teste2 = await teste.json()
-        return teste2
-    }
-    
-    function getId(url){
-      if(isNaN(url)){
-        let poke = url.split("/")
-        let pokemonSelected = poke[poke.length - 2]
-        return pokemonSelected
+async function getPokemonList(url1){
+  let teste = await fetch(`${url1}`)
+  let teste2 = await teste.json()
+  return teste2
+}
+function getId(url){
+  if(isNaN(url)){
+    let poke = url.split("/")
+    let pokemonSelected = poke[poke.length - 2]
+    return pokemonSelected
+  }
+  return url
+}
+function alphabetOrder(pokemonArray, search, filtered, filter1){
+  pokemonArray.sort((a, b) => {
+    let x = a.name
+    let y = b.name
+    return x === y ? 0 : x > y ? 1: -1})
+    if(!filtered || filter1 === "all"){
+      if( search){
+        return pokemonArray
+      }else{
+        return pokemonArray.slice(0, 20)
       }
-      return url
     }
-    function alphabetOrder(pokemonArray, search){
-      pokemonArray.sort((a, b) => {
-        let x = a.name
-        let y = b.name
-        return x === y ? 0 : x > y ? 1: -1})
-        if(!filtered || filter1 === "all"){
-         if( search){
-           return pokemonArray
-         }else{
-           return pokemonArray.slice(0, 20)
-         }
-          }
-          
-        else{return pokemonArray}
-        
-    }
-    function reverseAlphabetOrder(pokemonArray, search){
-      pokemonArray.sort((a, b) => {
-        let x = a.name
-        let y = b.name
-        return x === y ? 0 : x > y ? -1: 1})
-        if(!filtered || filter1 === "all"){
-         if( search){
-           return pokemonArray
-         }else{
-           return pokemonArray.slice(0, 20)
-         }
-          }
-          
-        else{return pokemonArray}
-
-    }        
-    function idOrder(pokemonArray, search){
-
-      pokemonArray.sort((a, b) => {
-        let x = +a.id || +getId(a.url)
-        let y = +b.id || +getId(b.url)
-        return x === y ? 0 : x > y ? 1: -1})
-        if(!filtered || filter1 === "all"){
-         if( search){
-           return pokemonArray
-         }else{
-           return pokemonArray.slice(0, 20)
-         }
-          }
-          
-        else{return pokemonArray}
-
-    }
-
-    function reverseIdOrder(pokemonArray, search){
-      pokemonArray.sort((a, b) => {
-        let x = +a.id || +getId(a.url)
-        let y = +b.id || +getId(b.url)
-        return x === y ? 0 : x > y ? -1: 1})
-        if(!filtered || filter1 === "all"){
-         if( search){
-           return pokemonArray
-         }else{
-           return pokemonArray.slice(0, 20)
-         }
-          }
-          
-        else{return pokemonArray}
-  
-    }
-    
-    useEffect(()=>{
-     
-       if(nextSliceArray[0] !== 0){
-         let pokes = pokemons.slice(nextSliceArray[0], nextSliceArray[1])
-         setPokemonList([...pokemonList, ...pokes])
-       }
-
-    },[nextSliceArray])
-
-    function GetOrdenation({pokemonArray="", search=false}){
-     
-      let pokemonsToOrder = pokemonArray || pokemons
       
-      setNextSliceArray([0, 20])
+    else{return pokemonArray}
+    
+}
+function reverseAlphabetOrder(pokemonArray, search, filtered, filter1){
+  pokemonArray.sort((a, b) => {
+    let x = a.name
+    let y = b.name
+    return x === y ? 0 : x > y ? -1: 1})
+    if(!filtered || filter1 === "all"){
+      if( search){
+        return pokemonArray
+      }else{
+        return pokemonArray.slice(0, 20)
+      }
+      }
+      
+    else{return pokemonArray}
 
-      switch(orderedByFilter){
-        case "A-Z":
-          setPokemonList(alphabetOrder(pokemonsToOrder, search)
-          )  
-          break
-        case "Z-A":
-          setPokemonList(reverseAlphabetOrder(pokemonsToOrder, search)
-          )
-          break
-        case "L-H":
-          setPokemonList(idOrder(pokemonsToOrder, search))
+}        
+function idOrder(pokemonArray, search, filtered, filter1){
+
+  pokemonArray.sort((a, b) => {
+    let x = +a.id || +getId(a.url)
+    let y = +b.id || +getId(b.url)
+    return x === y ? 0 : x > y ? 1: -1})
+    if(!filtered || filter1 === "all"){
+      if( search){
+        return pokemonArray
+      }else{
+        return pokemonArray.slice(0, 20)
+      }
+      }
+      
+    else{return pokemonArray}
+
+}
+
+function reverseIdOrder(pokemonArray, search, filtered, filter1){
+  pokemonArray.sort((a, b) => {
+    let x = +a.id || +getId(a.url)
+    let y = +b.id || +getId(b.url)
+    return x === y ? 0 : x > y ? -1: 1})
+    if(!filtered || filter1 === "all"){
+      if( search){
+        return pokemonArray
+      }else{
+        return pokemonArray.slice(0, 20)
+      }
+      }
+      
+    else{return pokemonArray}
+
+}
+function App() {
+  
+  
+  const [filter1, setFilter1]= useState("all")
+  const [filter2, setFilter2]= useState(false)
+  const [orderedByFilter, setOrderedByFilter] = useState("L-H")
+
+  const [filtered, setFiltered] = useState("")
+
+  const [nextSliceArray, setNextSliceArray] = useState([0, 20])
+  const [searching, setSearching] = useState("")
+  const [filteredFromSearching, setFilteredFromSearching] = useState([])
+  const [searched, setSearched] = useState(false)
+  const baseUrl = "https://pokeapi.co/api/v2/"
+  const [pokemonList, setPokemonList] = useState("")
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  useEffect(()=>{
+    
+      if(nextSliceArray[0] !== 0){
+        let pokes = pokemons.slice(nextSliceArray[0], nextSliceArray[1])
+        setPokemonList([...pokemonList, ...pokes])
+      }
+
+  },[nextSliceArray])
+
+  function GetOrdenation({pokemonArray="", search=false}){
+    
+    let pokemonsToOrder = pokemonArray || pokemons
+    
+    setNextSliceArray([0, 20])
+
+    switch(orderedByFilter){
+      case "A-Z":
+        setPokemonList(alphabetOrder(pokemonsToOrder, search, filtered, filter1)
+        )  
         break
-        case "H-L":
-          setPokemonList(reverseIdOrder(pokemonsToOrder, search))
-          break
-        default:
-          setPokemonList(pokemons.slice(0, 20))
-          break
+      case "Z-A":
+        setPokemonList(reverseAlphabetOrder(pokemonsToOrder, search, filtered, filter1)
+        )
+        break
+      case "L-H":
+        setPokemonList(idOrder(pokemonsToOrder, search, filtered, filter1))
+      break
+      case "H-L":
+        setPokemonList(reverseIdOrder(pokemonsToOrder, search, filtered, filter1))
+        break
+      default:
+        setPokemonList(pokemons.slice(0, 20))
+        break
+    }
+  }
+  useEffect(()=>{
+      (async()=>{
+        if(filtered){
+          setSearching("")
+          let teste = await getPokemonList(`${baseUrl}${filters[filter1]}/${filtered}`)
+          let pokes = teste.results || teste.pokemon_species || teste.pokemon.map(e=>e.pokemon)
+          GetOrdenation({pokemonArray:pokes})
+          setNextSliceArray([0, 0])
+        }
+      })()
+      
+  },[filtered])
+
+  useEffect(()=>{
+    let filter = []
+    if(!filtered){
+        filter = pokemons.filter(e=>e.name.includes(searching.toLowerCase()) || +e.id === +searching)
+    }else{
+      filter = pokemonList.filter(e=>e.name.includes(searching.toLowerCase()) || +e.id === +searching)
+
+    }
+    setFilteredFromSearching(filter)
+    
+  },[searching])
+
+  const handleSearch = useCallback(()=>{
+    if(searching){
+      setSearched(true)
+      GetOrdenation({pokemonArray:filteredFromSearching, search:true})
+      setNextSliceArray([0, 0])
+    }else{
+      if(filtered && filter1){
+        (async()=>{
+
+          setSearching("")
+          let teste = await getPokemonList(`${baseUrl}${filters[filter1]}/${filtered}`)
+          let pokes = teste.results || teste.pokemon_species || teste.pokemon.map(e=>e.pokemon)
+          GetOrdenation({pokemonArray:pokes})
+          setNextSliceArray([0, 0])
+        })()
+
+      }else{
+        setSearched(false)
+        GetOrdenation({search:false})
       }
     }
-    useEffect(()=>{
-        (async()=>{
-          if(filtered){
-            setSearching("")
-            let teste = await getPokemonList(`${baseUrl}${filters[filter1]}/${filtered}`)
-            let pokes = teste.results || teste.pokemon_species || teste.pokemon.map(e=>e.pokemon)
-            GetOrdenation({pokemonArray:pokes})
-            setNextSliceArray([0, 0])
-          }
-        })()
-        
-    },[filtered])
-  
-    useEffect(()=>{
-      let filter = []
-      if(!filtered){
-         filter = pokemons.filter(e=>e.name.includes(searching.toLowerCase()) || +e.id === +searching)
-      }else{
-        filter = pokemonList.filter(e=>e.name.includes(searching.toLowerCase()) || +e.id === +searching)
+    
+  },[pokemonList, filteredFromSearching, nextSliceArray, searched])
 
-      }
-      setFilteredFromSearching(filter)
-      
-    },[searching])
+  const handleSlice = useCallback(()=>{
+    setNextSliceArray([nextSliceArray[0]+20, nextSliceArray[1]+20])
+  },[nextSliceArray])
 
-    const handleSearch = useCallback(()=>{
-      if(searching){
-        setSearched(true)
-        GetOrdenation({pokemonArray:filteredFromSearching, search:true})
-        setNextSliceArray([0, 0])
-      }else{
-        if(filtered && filter1){
-          (async()=>{
+  useEffect(()=>{
+    if(filtered || searched){
+      GetOrdenation({pokemonArray:pokemonList, search:true})
+    }else{
+      GetOrdenation({})
 
-            setSearching("")
-            let teste = await getPokemonList(`${baseUrl}${filters[filter1]}/${filtered}`)
-            let pokes = teste.results || teste.pokemon_species || teste.pokemon.map(e=>e.pokemon)
-            GetOrdenation({pokemonArray:pokes})
-            setNextSliceArray([0, 0])
-          })()
+    }
+    
+  },[orderedByFilter])
 
-        }else{
-          setSearched(false)
-          GetOrdenation({search:false})
-        }
-      }
-      
-    },[pokemonList, filteredFromSearching, nextSliceArray, searched])
+  useEffect(()=>{
+    if(filter1 !== "all"){
+      (async()=>{
+        let filt = await getPokemonList(baseUrl + filters[filter1])
+        setFilter2(filt)
+      })()
+    }else{        
+      setSearched(false)
+      setFilter2(false)
+      setFiltered(false)
+      GetOrdenation({search:false})
+      setNextSliceArray([0, 20])
+    }
+    setSearching("")
 
-    const handleSlice = useCallback(()=>{
-      setNextSliceArray([nextSliceArray[0]+20, nextSliceArray[1]+20])
-    },[nextSliceArray])
-
-    useEffect(()=>{
-      if(filtered || searched){
-        GetOrdenation({pokemonArray:pokemonList, search:true})
-      }else{
-        GetOrdenation({})
-
-      }
-      
-    },[orderedByFilter])
-
-    useEffect(()=>{
-      if(filter1 !== "all"){
-        (async()=>{
-          let filt = await getPokemonList(baseUrl + filters[filter1])
-          setFilter2(filt)
-        })()
-      }else{        
-        setSearched(false)
-        setFilter2(false)
-        setFiltered(false)
-        GetOrdenation({search:false})
-        setNextSliceArray([0, 20])
-        
-        
-      }
-      setSearching("")
-
-    },[filter1])
+  },[filter1])
 
   return (
     <>
