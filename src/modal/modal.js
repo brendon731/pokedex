@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react"
 
-import {Modal} from 'react-bootstrap'
+// import {Modal} from 'react-bootstrap'
 import "./modal.css"
 import EvolutionChain from "./evolutionChain/evolution-chain.js"
 import PhotoAndName from "./photoAndName/photoAndName.js"
@@ -58,56 +58,49 @@ export default function Example() {
     getPokemonInfo(pokemonFromParam)
     
   },[pokemonFromParam])
-  
+  useEffect(()=>{
+    console.log(pokemon)
+  },[pokemon])
   return (
     <>
      {isPokemonFound?
-      <Modal
-        show={true}
-        onHide={() => navigate("/")}
-        size="lg"
-        aria-labelledby="example-modal-sizes-title-lg"
+      <div
+      className="modal"
+      
+      style={{backgroundImage:`url(pokemonwall.png)`, backgroundSize:"contain", backgroundColor:"black"}}
       >
+        <div className="modal__header">
+          <button
+          onClick={()=>navigate("/")}
+          >close</button></div>
           {pokemon &&
-          <>
+            <div className="modal__container">
+              <PhotoAndName 
+              name={pokemon.name}
+              photo={pokemon.photo}
+              changed={getPokemonInfo}/>
+
+              <Stats stats={pokemon.stats}/>
+              
+              <AttackAndDefense types={pokemon.types}/>
+
+              <About {...pokemon}/>
+
+              <EvolutionChain url={pokemon.chain} />
+            </div> 
         
-        <Modal.Body 
-        style={{backgroundImage:`url(pokemonwall.png)`, backgroundSize:"cover", backgroundColor:"black"}}
-        >
-        <Modal.Header closeButton 
-        style={{border:'none', padding:"5px 5px 5px 0"}}
-        >
-          
-        </Modal.Header>
-          <div className="modal__container">
-            <PhotoAndName 
-            name={pokemon.name}
-            photo={pokemon.photo}
-            changed={getPokemonInfo}/>
-
-            <Stats stats={pokemon.stats}/>
-            
-            <AttackAndDefense types={pokemon.types}/>
-
-            <About {...pokemon}/>
-
-            <EvolutionChain url={pokemon.chain} />
-          </div> 
-        </Modal.Body>
-        
-            </>}
-      </Modal >:
-      <Modal
-      show={true}
-      onHide={() => navigate("/")}
-      size="lg"
-      aria-labelledby="example-modal-sizes-title-lg">
-        <Modal.Header closeButton className="red" style={{border:"none"}}>
+            }
+      </div>
+            :
+      // show={true}
+      // onHide={() => navigate("/")}
+      
+        <div  className="red" style={{border:"none"}}>
           <h3>Pokemon {`"${pokemonFromParam}"`} not found</h3>
-        </Modal.Header>
+        </div>
 
         
-      </Modal>
+      
       }
     </>
   );

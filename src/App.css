@@ -1,15 +1,26 @@
+*{
+    box-sizing:border-box;
 
+}
 body{
-   
+    padding:0;
+    margin:0;
     background-attachment: fixed;
     background-image:linear-gradient(rgba(255, 0, 0, 0.096), rgba(54, 177, 43, 0.185));
-    overflow-x:hidden;
+    /* overflow-x:hidden; */
+    font-family:Arial, Helvetica, sans-serif;
 }
-.container{
-    display:flex;
-    flex-wrap:wrap;
+a{
+    text-decoration: none;
+}
+ul, p, h1, h2, h3, h4{
+    padding:0;
+    margin:0;
+}
+li{
+    list-style-type: none;
+}
 
-}
 @keyframes even{
     0%{
         transform:translateX(100%);
@@ -27,15 +38,19 @@ body{
 
     }
 }
-.container .card:nth-child(odd){
+.card-container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-around;
+}
+.card-container .card:nth-child(odd){
     animation:odd 750ms forwards;
 }
 
-.container .card:nth-child(even){
+.card-container .card:nth-child(even){
     animation:even 750ms forwards;
 }
 .card{
-    
     animation:2s entering;
     transition:1s;
 }
@@ -48,6 +63,7 @@ body{
     }
     
 }
+
 
 /* header{
   

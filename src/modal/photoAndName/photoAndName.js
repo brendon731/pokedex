@@ -1,12 +1,13 @@
 
+import { Container } from "../container/styles"
 import "./styles.css"
 
 
-export default function PhotoAndName({name,photo, changed}){
+export default function PhotoAndName({name, photo, changed}){
     return(<>
-     <div className="photoAndName">
+     <Container>
         {name.length === 1?
-        <h2 className="photoAndName__name">{name[0]}</h2>:
+        <h1 className="photoAndName__name">{name[0]}</h1>:
         <select
         className="photoAndName__select__name"
           onChange={(evt)=>{changed(evt.target.value)}}>
@@ -20,7 +21,7 @@ export default function PhotoAndName({name,photo, changed}){
         src={photo}
         className="photoAndName__photo"
         />
-      </div>
+      </Container>
     </>)
 
 }

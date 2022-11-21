@@ -1,28 +1,22 @@
 import { useEffect, useState } from "react"
-import "./../types.css"
-//import "./pokemon-colors.css"
-import "./../card-colors2.css"
-// import "./styles.css"
-
+// import "./../../../types.css"
 
 import {Link} from "react-router-dom"
 import { Card } from "./styles"
 
-async function getPokemon(pokemon){
-    let teste = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemon)
-    let teste2 = await teste.json()
-    return teste2
-}
-export default function Thumb({pokemon}){
+
+export function Cards({pokemon}){
     const [isLoading, setIsLoading] = useState(false)
     return(
     <>
     <Card>
+
     <Link 
         to={`/${pokemon.name}`} 
             // style={{position:"relative"}}
         className={pokemon?.types[0].type.name}
         >
+            <div>
 
                 {/* <span className="pokemon-id">#{pokemon.id}</span> */}
                 <div className={`card-img ${isLoading ? "card-img-waiting" : null}`}
@@ -45,9 +39,10 @@ export default function Thumb({pokemon}){
                         )}
                 </div>
                 </div>
-        </Link>
-            </Card>
+            </div>
         
+        </Link>
+    </Card>
      
     </>)
 

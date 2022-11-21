@@ -1,8 +1,9 @@
 import {useState, useEffect} from "react"
 import "./styles.css"
 import {getMultipliers} from "../../teste.js"
-
-
+import { Container } from "../container/styles"
+import { Input } from "./input/index" 
+import { Multiplier } from "./multipliers"
 export default function  AttackAndDefense(props){
   const [attack_and_defense, setAttack_and_defense] = useState(false)
     useEffect(()=>{
@@ -18,47 +19,35 @@ export default function  AttackAndDefense(props){
     
 
   const [radioSelect, setRadioSelect] = useState("attack")
-
-    function multipliers(e){
-        return (
-        <div className="multipliers__each__multiplier" key={e[0] + e[1][0] + "attack"}>
-            <span>{e[0]}x</span>
-            <ul>
-                {e[1].map(type=>
-                <li key={type + e[0]} className="multiplier__each__type">
-                    <span className={`type type-${type}`}>{type}</span>
-                </li>
-                )}
-            </ul>
-        </div>)
-    }
-    function multipliersInput(move){
-        return(<>
-        <input
-        id={move}
-        type="radio"
-        name="mesmo"
-        onChange={(evt=>{setRadioSelect(move)})} 
-        checked={radioSelect === move}
-        />
-        <label htmlFor={move}>{move}</label>
-        </>)
-    }
+    
     return( 
-    <div className="multipliers">
-        
-        {multipliersInput("attack")}
-
-        {multipliersInput("defense")}
+    <Container>
+        <h2>
+        <Input
+            move={"attack"}
+            radioSelect={radioSelect}
+            setRadioSelect={setRadioSelect}
+            />
+        <Input
+            move={"defense"}
+            radioSelect={radioSelect}
+            setRadioSelect={setRadioSelect}
+            />
+        </h2>
 
         <div className="attackAndDefense">
             <div hidden={radioSelect === "defense"}>
-                {attack_and_defense.attack && attack_and_defense.attack.map(e=>multipliers(e))}
+                {attack_and_defense.attack && attack_and_defense.attack.map(e=>
+                    <Multiplier factor={e}/>
+                    )}
             </div>
             <div hidden={radioSelect === "attack"}>
-                {attack_and_defense.defense && attack_and_defense.defense.map(e=>multipliers(e))}
+                {attack_and_defense.defense && attack_and_defense.defense.map(e=>
+                    <Multiplier factor={e}/>
+                    
+                    )}
             </div>
         </div>
 
-  </div>)
+  </Container>)
 }

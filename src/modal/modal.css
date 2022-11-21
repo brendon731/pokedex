@@ -1,19 +1,33 @@
-.modal-dialog{
-    max-width:980px !important;
-    margin-top:10px !important;
+
+.modal{
+    min-height:50%;
+    min-width:50%;
+    width:calc(100% - 1em);
+    margin:auto;
+    padding:1em;
+    position:absolute;
+    top:0;
+    bottom:.5rem;
+    position:fixed;
+    overflow:scroll;
 
 }
-.modal-body{
-    padding:.5em !important;
+.modal__header{
+    display:flex;
 }
-.modal{
-    padding:0 !important;
+.modal__header button{
+    margin-left:auto;
 }
 .modal__container{
-    padding:0 !important;
+    padding:0;
     margin:0;
-    min-width:100% !important;
+    /* min-width:100%; */
+    /* border:1px solid black; */
     display:flex;
     justify-content: center;
     flex-wrap:wrap;
+}
+.modal h2{
+    font-size:18px;
+    margin:0;
 }

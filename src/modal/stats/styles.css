@@ -3,6 +3,7 @@
     border:1px solid #0000001f;
     max-width:400px;
     width:320px;
+    flex:1;
 
 }
 .stats__list{

@@ -109,7 +109,7 @@ function getId(url){
 // }
 function App() {
   const [pokemonList, setPokemonList] = useState([])
-  const [amount, setAmount] = useState(20)
+  const [amount, setAmount] = useState(10)
   const [order, setOrder] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
@@ -133,11 +133,11 @@ function App() {
     
   }
   
-  function call(pokemons, amount=20){
+  function call(pokemons, amount=10){
     return new Promise((resolve, reject)=>{
 
       Promise.all(
-        [...pokemons.slice(amount - 20, amount)].map(e=>getPokemon(e.id))
+        [...pokemons.slice(amount - 10, amount)].map(e=>getPokemon(e.id))
         )
         .then(res=>resolve(res))
         .catch(err=>{
@@ -165,7 +165,7 @@ function App() {
     call(newList, amount + 20)
     .then(res=>setPokemonList([...pokemonList, ...res]))
     .catch(err=>console.log(err))
-    setAmount(amount + 20)
+    setAmount(amount + 10)
 
     
   }
@@ -192,7 +192,6 @@ function App() {
   }
   
   useEffect(()=>{
-    // setIsLoading(true)
     let newList = []
     if(firstFilterOptions){
       newList = typeOfOrder([...pokemonList], order)
@@ -201,7 +200,6 @@ function App() {
     }else{
 
       newList = typeOfOrder(pokemons, order)
-      // console.log(pokemons.length)
       call(newList)
       .then(res=>setPokemonList(res))
       .catch(err=>console.log(err))
@@ -238,16 +236,13 @@ function App() {
       }
       
       setIsLoading(false)
-      // if(selectedFilter){
-      //   }else{
-      //     // setSecondFilterOptions([])
-      //   }
     })()
         
         
   },[selectedFilter])
   return(
     <>
+    <Outlet/>
       <div className="container">
         <header>
           <Ordenator
@@ -268,14 +263,19 @@ function App() {
           optionsList={secondFilterOptions}
           />}
         </header>
-          {isLoading?<div>carregando</div>:pokemonList.length && pokemonList.map(pokemon=>
-          (<Thumb 
+        <div className="card-container">
+
+          {isLoading?
+          <div>carregando</div>:
+          pokemonList.length && pokemonList.map(pokemon=>
+            (<Thumb 
             className="card"
             key={pokemon.name}
             pokemon={pokemon}
             />)
             )
             }
+        </div>
           
       </div>
       {isLoading && <h1 style={{margin:"5em 0"}}>carregando.....</h1>}
