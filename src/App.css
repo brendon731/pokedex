@@ -3,10 +3,53 @@ body{
    
     background-attachment: fixed;
     background-image:linear-gradient(rgba(255, 0, 0, 0.096), rgba(54, 177, 43, 0.185));
-
     overflow-x:hidden;
 }
-header{
+.container{
+    display:flex;
+    flex-wrap:wrap;
+
+}
+@keyframes even{
+    0%{
+        transform:translateX(100%);
+    }
+    100%{
+        transform:translateX(0);
+    }
+}
+@keyframes odd{
+    0%{
+        transform:translateX(-100%);
+    }
+    100%{
+        transform:translateX(0);
+
+    }
+}
+.container .card:nth-child(odd){
+    animation:odd 750ms forwards;
+}
+
+.container .card:nth-child(even){
+    animation:even 750ms forwards;
+}
+.card{
+    
+    animation:2s entering;
+    transition:1s;
+}
+@keyframes entering {
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+    
+}
+
+/* header{
   
     width:100%;
     z-index:2;
@@ -263,4 +306,4 @@ label{
     text-transform: uppercase;
     border:none;
     border-radius:10px;
-}
+} */

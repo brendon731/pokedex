@@ -12,36 +12,52 @@ async function getPokemon(pokemon){
     let teste2 = await teste.json()
     return teste2
 }
-export default function Thumb({id, name}){
-    const [pokemon, setPokemon] = useState(false)
+export default function Thumb({pokemon}){
+    // console.log(pokemon, "---pokemon------")
+    // const [pokemon, setPokemon] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
    
-    useEffect(async()=>{
-        let teste = await getPokemon(id)
-        setPokemon({
-            is_front:true,
-            id:teste.id,
-            name:teste.name,
-            img:teste.sprites.other.dream_world.front_default,
-            photo:teste.sprites.other["official-artwork"].front_default,
-            types:teste.types
-        }) 
-    },[])
+    // useEffect(async()=>{
+    //     let teste = await getPokemon(id)
+    //     setPokemon({
+    //         is_front:true,
+    //         id:teste.id,
+    //         name:teste.name,
+    //         img:teste.sprites.other.dream_world.front_default,
+    //         photo:teste.sprites.other["official-artwork"].front_default,
+    //         types:teste.types
+    //     }) 
+    //     setIsLoading(false)
+    // },[])
 
+    // if(isLoading) return  (<Link  to="/" className={`card card-loading`}>
+    {/* <span className="pokemon-id">#id</span>
+    <div className="card-img"></div>
+        
+        <h4>kuyuk</h4>
+        <div className="type-container"></div> */}
+
+{/* </Link>) */}
     return(
     <>
-        {pokemon &&
-        <>
-        <Link 
+    
+        
+    <Link 
             className={`card ${pokemon.types[0].type.name}`}
             to={`/${pokemon.name}`} 
             style={{position:"relative"}}
         >
-            <span className="pokemon-id">
-                #{pokemon.id}
-            </span>
-            <div className="card-img" style={{backgroundImage:`url(${pokemon.photo})`}}></div>
+            <span className="pokemon-id">#{pokemon.id}</span>
+            <div className={`card-img ${isLoading ? "card-img-waiting" : null}`}
+            // style={isLoading ? {} : { backgroundColor:"grey"}}
+            >
+                <img src={pokemon.photo} alt="ta chegando"
+                style={isLoading ? {} : { backgroundColor:"grey",display: 'none' }}
+                onLoad={() => setIsLoading(true)}
+                />
+            </div>
                 
-                <h4>{name}</h4>
+                <h4>{pokemon.name}</h4>
                 <div className="type-container" 
                     >
                     {pokemon.types.map(poke=>
@@ -53,9 +69,7 @@ export default function Thumb({id, name}){
                 </div>
         
         </Link>
-        </>
-
-     }
+     
     </>)
 
 }

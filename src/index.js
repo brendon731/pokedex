@@ -4,7 +4,7 @@ import App from './App';
 import Example from "./modal/modal.js"
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     
     <Router>
       <Routes>
@@ -13,7 +13,7 @@ ReactDOM.render(
         </Route>
       </Routes>
     </Router>
-  </React.StrictMode>,
+  </>,
   document.getElementById('root')
 );
 

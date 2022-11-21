@@ -1,5 +1,6 @@
 
-let pokes = ["bulbasaur",
+let pokes = [
+"latios",
 "ivysaur",
 "venusaur",
 "charmander",
