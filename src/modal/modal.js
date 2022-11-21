@@ -9,6 +9,7 @@ import AttackAndDefense from "./attackAndDefense/attackAndDefense.js"
 import About from "./about/about.js"
 
 import {useParams, useNavigate} from "react-router-dom"
+import { Loader } from "../components/pokeballLoader"
 function GetEnglishText(param){
     let text = param.filter(l=>l.language.name==="en").map(e=>e.flavor_text)
   return text[0]
@@ -26,6 +27,7 @@ export default function Example() {
 
   const [pokemon, setPokemon] = useState(false)
   const [isPokemonFound, setIsPokemonFound] = useState(true)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   async function getPokemonInfo(poke){
     try{
@@ -48,6 +50,7 @@ export default function Example() {
       color:pokemonFromSpecies.color.name,
       text:GetEnglishText(pokemonFromSpecies.flavor_text_entries)
     })
+    
   
   }catch(error){
     setIsPokemonFound(false) 
@@ -56,52 +59,58 @@ export default function Example() {
 
   useEffect(()=>{
     getPokemonInfo(pokemonFromParam)
-    
+    setIsLoaded(true)
   },[pokemonFromParam])
   useEffect(()=>{
     console.log(pokemon)
   },[pokemon])
+  if(!isPokemonFound)return <div 
+  className="modal"
+  style={{backgroundImage:`url(pokemonwall.png)`, backgroundSize:"contain", backgroundColor:"black"}}
+
+  >
+    <div className="modal__header">
+            <button
+            onClick={()=>navigate("/")}
+            >close</button>
+          </div>
+    404 not found</div>
   return (
     <>
-     {isPokemonFound?
+    
       <div
-      className="modal"
+        className="modal"
       
-      style={{backgroundImage:`url(pokemonwall.png)`, backgroundSize:"contain", backgroundColor:"black"}}
+        style={{backgroundImage:`url(pokemonwall.png)`, 
+        backgroundSize:"cover",
+        backgroundRepeat:"no-repeat", 
+        backgroundColor:"black"}}
       >
-        <div className="modal__header">
-          <button
-          onClick={()=>navigate("/")}
-          >close</button></div>
-          {pokemon &&
+        
+          <div className="modal__header">
+            <button
+            onClick={()=>navigate("/")}
+            >close</button>
+          </div>
+          {pokemon?
             <div className="modal__container">
-              <PhotoAndName 
-              name={pokemon.name}
-              photo={pokemon.photo}
-              changed={getPokemonInfo}/>
+                <PhotoAndName 
+                name={pokemon.name}
+                photo={pokemon.photo}
+                changed={getPokemonInfo}/>
 
-              <Stats stats={pokemon.stats}/>
-              
-              <AttackAndDefense types={pokemon.types}/>
+                <Stats stats={pokemon.stats}/>
+                
+                <AttackAndDefense types={pokemon.types}/>
 
-              <About {...pokemon}/>
+                <About {...pokemon}/>
 
-              <EvolutionChain url={pokemon.chain} />
-            </div> 
-        
-            }
+                <EvolutionChain url={pokemon.chain} />
+          </div>
+          :<Loader/>}
+          
+            
       </div>
-            :
-      // show={true}
-      // onHide={() => navigate("/")}
-      
-        <div  className="red" style={{border:"none"}}>
-          <h3>Pokemon {`"${pokemonFromParam}"`} not found</h3>
-        </div>
-
-        
-      
-      }
     </>
   );
   }

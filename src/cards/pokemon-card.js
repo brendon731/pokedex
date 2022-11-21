@@ -14,7 +14,7 @@ async function getPokemon(pokemon){
     return teste2
 }
 export default function Thumb({pokemon}){
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     return(
     <>
     <Card>
@@ -25,15 +25,12 @@ export default function Thumb({pokemon}){
         >
 
                 {/* <span className="pokemon-id">#{pokemon.id}</span> */}
-                <div className={`card-img ${isLoading ? "card-img-waiting" : null}`}
-                style={isLoading ? {} : { backgroundColor:"grey"}}
-                >
+                <div className={`card-img ${isLoading ? "card-img-waiting" : null}`}>
                     <img src={pokemon.photo} alt="ta chegando"
-                    style={isLoading ? {} : { backgroundColor:"grey",display: 'none' }}
-                    onLoad={() => setIsLoading(true)}
+                    style={isLoading ? { backgroundColor:"grey", display: 'none' } : {}  }
+                    onLoad={() => setIsLoading(false)}
                     />
                 </div>
-                <div>
 
                 <h4>{pokemon.name}</h4>
                 <div className="type-container">
@@ -43,7 +40,6 @@ export default function Thumb({pokemon}){
                         className={`type type-${poke.type.name}`}
                         >{poke.type.name}</span>
                         )}
-                </div>
                 </div>
         </Link>
             </Card>

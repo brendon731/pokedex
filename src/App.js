@@ -41,75 +41,10 @@ function getId(url){
   }
   return url
 }
-// function alphabetOrder(pokemonArray, search, filtered, filter1){
-//   pokemonArray.sort((a, b) => {
-//     let x = a.name
-//     let y = b.name
-//     return x === y ? 0 : x > y ? 1: -1})
-//     if(!filtered || filter1 === "all"){
-//       if( search){
-//         return pokemonArray
-//       }else{
-//         return pokemonArray.slice(0, 20)
-//       }
-//     }
-      
-//     else{return pokemonArray}
-    
-// }
-// function reverseAlphabetOrder(pokemonArray, search, filtered, filter1){
-//   pokemonArray.sort((a, b) => {
-//     let x = a.name
-//     let y = b.name
-//     return x === y ? 0 : x > y ? -1: 1})
-//     if(!filtered || filter1 === "all"){
-//       if( search){
-//         return pokemonArray
-//       }else{
-//         return pokemonArray.slice(0, 20)
-//       }
-//       }
-      
-//     else{return pokemonArray}
 
-// }        
-// function idOrder(pokemonArray, search, filtered, filter1){
-
-//   pokemonArray.sort((a, b) => {
-//     let x = +a.id || +getId(a.url)
-//     let y = +b.id || +getId(b.url)
-//     return x === y ? 0 : x > y ? 1: -1})
-//     if(!filtered || filter1 === "all"){
-//       if( search){
-//         return pokemonArray
-//       }else{
-//         return pokemonArray.slice(0, 20)
-//       }
-//       }
-      
-//     else{return pokemonArray}
-
-// }
-
-// function reverseIdOrder(pokemonArray, search, filtered, filter1){
-//   pokemonArray.sort((a, b) => {
-//     let x = +a.id || +getId(a.url)
-//     let y = +b.id || +getId(b.url)
-//     return x === y ? 0 : x > y ? -1: 1})
-//     if(!filtered || filter1 === "all"){
-//       if( search){
-//         return pokemonArray
-//       }else{
-//         return pokemonArray.slice(0, 20)
-//       }
-//       }
-      
-//     else{return pokemonArray}
-
-// }
 function App() {
   const [pokemonList, setPokemonList] = useState([])
-  const [amount, setAmount] = useState(10)
+  const [amount, setAmount] = useState(20)
   const [order, setOrder] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
@@ -133,11 +68,11 @@ function App() {
     
   }
   
-  function call(pokemons, amount=10){
+  function call(pokemons, amount=20){
     return new Promise((resolve, reject)=>{
 
       Promise.all(
-        [...pokemons.slice(amount - 10, amount)].map(e=>getPokemon(e.id))
+        [...pokemons.slice(amount - 20, amount)].map(e=>getPokemon(e.id))
         )
         .then(res=>resolve(res))
         .catch(err=>{
@@ -165,7 +100,7 @@ function App() {
     call(newList, amount + 20)
     .then(res=>setPokemonList([...pokemonList, ...res]))
     .catch(err=>console.log(err))
-    setAmount(amount + 10)
+    setAmount(amount + 20)
 
     
   }
@@ -445,7 +380,7 @@ function App() {
 //                 onChange={(evt)=>setSearching(evt.target.value)}/>
 //                 {searching &&
 //                 <div id="search-history">
-//                   <ul style={{width:"100%"}}>
+//                   <ul style={{width:"200%"}}>
 //                     {filteredFromSearching.map((e, index)=>
 //                     <li 
 //                     key={"search-history" + index}
