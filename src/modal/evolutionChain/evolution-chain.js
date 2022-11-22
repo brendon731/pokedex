@@ -3,7 +3,7 @@ import Thumb from "../../cards/pokemon-card.js"
 import {Link} from "react-router-dom"
 import "./styles.css"
 import {Cards} from "./evoChainCard/index"
-
+import {Loader} from "../../components/pokeballLoader"
 export default function EvolutionChain(props){
     const [pokemonChain, setPokemonChain] = useState([])
     
@@ -58,22 +58,15 @@ export default function EvolutionChain(props){
     <div className="evolution-chain">
 
       <h2 style={{marginBottom:"7px"}}>Family</h2>
-
-      {pokemonChain.length && 
-
         <div  className="evolution-chain-container">
-          {pokemonChain.map(e=>
+          {pokemonChain.length ? pokemonChain.map(e=>
               <Cards 
               pokemon={e}
-              // id={getId(e.url)}
-              // name={e.name}
-              key={"evolution-chain" + e.name}
+              key={"evolution-chain" + e?.name}
               />
           
-          )}
+          ):<Loader/>}
         </div>
-    
-    }
     </div>
 
   )

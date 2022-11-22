@@ -18,33 +18,30 @@ export default function Thumb({pokemon}){
     return(
     <>
     <Card>
-    <Link 
-        to={`/${pokemon.name}`} 
-            // style={{position:"relative"}}
-        className={pokemon?.types[0].type.name}
-        >
+        <Link 
+            to={`/${pokemon.name}`} 
+            className={pokemon?.types[0].type.name}
+            >
 
-                {/* <span className="pokemon-id">#{pokemon.id}</span> */}
-                <div className={`card-img ${isLoading ? "card-img-waiting" : null}`}>
-                    <img src={pokemon.photo} alt="ta chegando"
-                    style={isLoading ? { backgroundColor:"grey", display: 'none' } : {}  }
-                    onLoad={() => setIsLoading(false)}
-                    />
-                </div>
+            {/* <span className="pokemon-id">#{pokemon.id}</span> */}
+            <div className={`card-img ${isLoading ? "card-img-waiting" : null}`}>
+                <img src={pokemon.photo} alt="ta chegando"
+                // style={isLoading ? { backgroundColor:"grey", display: 'none' } : {}  }
+                onLoad={() => setIsLoading(false)}
+                />
+            </div>
 
-                <h4>{pokemon.name}</h4>
-                <div className="type-container">
-                    {pokemon?.types?.map(poke=>
-                        <span 
-                        key={pokemon.name + poke.type.name + "card-photo"}
-                        className={`type type-${poke.type.name}`}
-                        >{poke.type.name}</span>
-                        )}
-                </div>
+            <h4>{pokemon.name}</h4>
+            <div className="type-container">
+                {pokemon?.types?.map(poke=>
+                    <span 
+                    key={pokemon.name + poke.type.name + "card-photo"}
+                    className={`type type-${poke.type.name}`}
+                    >{poke.type.name}</span>
+                    )}
+            </div>
         </Link>
-            </Card>
-        
-     
+    </Card>        
     </>)
 
 }

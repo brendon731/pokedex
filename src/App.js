@@ -135,7 +135,7 @@ function App() {
   
   useEffect(()=>{
     let newList = []
-    if(firstFilterOptions){
+    if(selectedFilter){
       newList = typeOfOrder([...pokemonList], order)
       setPokemonList([...newList])
 
@@ -199,7 +199,7 @@ function App() {
           setSecondFilterOptions={setSecondFilterOptions}
           />
 
-          {secondFilterOptions?.length && 
+          {!!secondFilterOptions?.length && 
           <SecondFilter
           setSelectedFilter={setSelectedFilter}
           selectedFilter={selectedFilter}

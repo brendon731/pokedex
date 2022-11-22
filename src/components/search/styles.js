@@ -9,14 +9,27 @@ export const Container = styled.div`
         display:flex;
     }
     ul{
+        display:none;
+        /* width:100%;
+        height:250px;
+        overflow-y:scroll;
+        top:20px;
+        position:absolute;
+        border:1px solid black;
+        background-color: white; */
+
+    }
+    input:focus ~ ul{
+        display:block;
         width:100%;
         height:250px;
         overflow-y:scroll;
+        top:20px;
         position:absolute;
         border:1px solid black;
         background-color: white;
-
     }
+   
 
 
 `

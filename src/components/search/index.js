@@ -30,15 +30,18 @@ export function Searcher({setSearch, search}){
                 }
                     />
                 <button onClick={closeSearchList}>Pesquisar</button>
+                {
+                    searchList.length?
+                    <ul>
+                        {searchList.map(e=>(
+                            <li onMouseDown={evt=>{
+                                setSearch(e.name)
+                                closeSearchList()
+                            }}>{e.name}</li>
+                            ))}
+                    </ul>:null
+                    }
             </div>
-            {isListOpened && searchList.length && <ul>
-                {searchList.length && searchList.map(e=>(
-                    <li onClick={evt=>{
-                        setSearch(e.name)
-                        closeSearchList()
-                    }}>{e.name}</li>
-                ))}
-            </ul>}
         </Container>
     )
 }

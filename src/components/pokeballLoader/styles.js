@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 
 const rotacao = keyframes`
 100%{
-    transform:rotate(360deg);
+    transform:translate(-50%, -50%) rotate(360deg);
 }
 `
 export const Pokeball = styled.div`
@@ -11,8 +11,11 @@ export const Pokeball = styled.div`
         margin:auto;
         height:100px;
         width:100px;
+        top:50%;
+        left:50%;
+        transform:translate(-50%, -50%);
         border:5px solid black;
-        position:relative;
+        position:absolute;
         animation:${rotacao} 1s infinite linear;
     &:after{
         content:"";
@@ -20,7 +23,7 @@ export const Pokeball = styled.div`
         position:absolute;
         top:50%;
         left:50%;
-        transform:translate(-50%, -50%);
+        transform: translate(-50%, -50%);
         height:25px;
         width:25px;
         border-radius:50%;

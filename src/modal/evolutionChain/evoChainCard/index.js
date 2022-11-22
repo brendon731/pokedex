@@ -19,17 +19,14 @@ export function Cards({pokemon}){
             <div>
 
                 {/* <span className="pokemon-id">#{pokemon.id}</span> */}
-                <div className={`card-img ${isLoading ? "card-img-waiting" : null}`}
-                style={isLoading ? {} : { backgroundColor:"grey"}}
-                >
-                    <img src={pokemon.photo} alt="ta chegando"
-                    style={isLoading ? {} : { backgroundColor:"grey",display: 'none' }}
+                <div className={`card-img`}>
+                    <img src={pokemon?.photo} alt="ta chegando"
                     onLoad={() => setIsLoading(true)}
                     />
                 </div>
                 <div>
 
-                <h4>{pokemon.name}</h4>
+                <h4 className="pokemon__name">{pokemon?.name}</h4>
                 <div className="type-container">
                     {pokemon?.types?.map(poke=>
                         <span 

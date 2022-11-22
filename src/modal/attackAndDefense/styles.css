@@ -4,6 +4,12 @@
     margin:5px 0;
     display:flex;
 }
+.multipliers__each__multiplier{
+    margin:1rem 0;
+}
+.multipliers__each__multiplier li{
+    display:inline-block;
+}
 .multiplier__each__type{
     margin:0 0 5px 0;
 
