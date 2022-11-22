@@ -9,7 +9,7 @@ const filter = {
   }
   const filters = [
     {
-        name:"",
+        name:"all",
         value:""
     },
     {

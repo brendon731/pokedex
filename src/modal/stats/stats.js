@@ -15,7 +15,11 @@ export default function Stats({stats}){
         {stats.map(e=>
         <li key={e.stat.name + "stat"} className="stats__item">
             <span className="stats__name">{e.stat.name}</span>
-            <span className="stats__progress">{e.base_stat}</span>
+            <span className="stats__progress">
+                {e.base_stat}
+                <span className="stats__progress__bar" style={{width:`${getStats(e.base_stat)}%`}}></span>
+            </span>
+
             {/* <ProgressBar 
             style={{ maxWidth:"350px", flexGrow:"1", alignSelf:"center"}}
             striped 

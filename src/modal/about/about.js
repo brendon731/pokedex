@@ -4,6 +4,8 @@ import {Container} from "../container/styles"
 export default function About({text, name, weight, height, habitat, abilities, eggs, types}){
     return(
         <Container>
+          <div className="about">
+
           <p className="about__text">{text}</p>
           <p style={{float:"left"}}><strong>Weight: </strong>{weight}kg</p>
           <p style={{float:"right"}}><strong>Height: </strong>{height}m</p>
@@ -34,6 +36,8 @@ export default function About({text, name, weight, height, habitat, abilities, e
                 </span>
               </li>)}
           </ul>
+          </div>
+
       </Container>
     )
 }

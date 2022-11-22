@@ -10,14 +10,14 @@ import {Outlet} from "react-router-dom"
 import { Ordenator } from "./components/ordernator";
 import { Filter } from "./components/filter";
 import { SecondFilter } from "./components/secondFilter";
- 
+import {Searcher} from "./components/search"
+
 
 async function getPokemonListFiltered(url, category){
   let teste = await fetch(`https://pokeapi.co/api/v2/${url}/${category}`,{
     mode:"cors"
   })
   let teste2 = await teste.json()
-  // console.log(teste2.pokemon.map(e=>e.pokemon))
   if(teste2.pokemon){
     return teste2.pokemon.map(e=>e.pokemon)
   }
@@ -51,7 +51,14 @@ function App() {
   const [firstFilterOptions, setFirstFilterOptions] = useState("")
   const [secondFilterOptions, setSecondFilterOptions] = useState([])
   const [selectedFilter, setSelectedFilter] = useState("")
+  const [search, setSearch] = useState("")
 
+  function testSearch(title){
+    if(!search) return true
+    const regex = new RegExp(search, "i")
+    return regex.test(title)
+  }
+  
   async function getPokemon(id){
     // let teste = await getPokemon(id)
     let data = await fetch("https://pokeapi.co/api/v2/pokemon/" + id)
@@ -145,6 +152,7 @@ function App() {
   useEffect(()=>{
     (async()=>{
       if(firstFilterOptions){
+
           let data = await getPokemonListFilter(firstFilterOptions)
           setSecondFilterOptions([...typeOfOrder(data, order)])
           
@@ -156,7 +164,7 @@ function App() {
           setPokemonList([...data])
 
         }
-        setSelectedFilter(``)
+        // setSelectedFilter(``)
     })()
   },[firstFilterOptions])
 
@@ -172,14 +180,14 @@ function App() {
       
       setIsLoading(false)
     })()
-        
-        
   },[selectedFilter])
+
   return(
     <>
     <Outlet/>
       <div className="container">
         <header>
+          <Searcher setSearch={setSearch} search={search}/>
           <Ordenator
           order={order}
           setOrder={setOrder}
