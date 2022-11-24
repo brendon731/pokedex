@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { pokemons } from "../../pokemonnames"
 import { Container, List } from "./styles"
 
-export function Searcher({setSearch, search}){
+export function Searcher({setSearch, search, searchPokemon}){
     const [searchList, setSearchList] = useState([])
     const [isListOpened, setIsListOpened] = useState(false)
     function testSearch(title){
@@ -16,7 +16,6 @@ export function Searcher({setSearch, search}){
     },[search])
     
     function closeSearchList(){
-        setIsListOpened(false)
     }
     return(
         <Container>
@@ -29,12 +28,17 @@ export function Searcher({setSearch, search}){
                     setSearch(evt.target.value) }  
                 }
                     />
-                <button onClick={closeSearchList}>Pesquisar</button>
+                <button onClick={()=>{
+                    searchPokemon(search)
+
+                }}>Pesquisar</button>
                 {
                     searchList.length?
                     <ul>
                         {searchList.map(e=>(
-                            <li onMouseDown={evt=>{
+                            <li 
+                            key={e.name + "search"}
+                            onMouseDown={evt=>{
                                 setSearch(e.name)
                                 closeSearchList()
                             }}>{e.name}</li>

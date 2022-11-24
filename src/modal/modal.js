@@ -5,7 +5,7 @@ import "./modal.css"
 import EvolutionChain from "./evolutionChain/evolution-chain.js"
 import PhotoAndName from "./photoAndName/photoAndName.js"
 import Stats from "./stats/stats.js"
-import AttackAndDefense from "./attackAndDefense/attackAndDefense.js"
+import AttackAndDefense from "./attackAndDefense/index.js"
 import About from "./about/about.js"
 
 import {useParams, useNavigate} from "react-router-dom"

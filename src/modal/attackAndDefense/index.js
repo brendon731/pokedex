@@ -37,13 +37,15 @@ export default function  AttackAndDefense(props){
 
         <div className="attackAndDefense">
             <div hidden={radioSelect === "defense"}>
-                {attack_and_defense.attack && attack_and_defense.attack.map(e=>
-                    <Multiplier factor={e}/>
+                {attack_and_defense.attack && 
+                attack_and_defense.attack.map(e=>
+                    <Multiplier key={e + "attack"} factor={e}/>
                     )}
             </div>
             <div hidden={radioSelect === "attack"}>
-                {attack_and_defense.defense && attack_and_defense.defense.map(e=>
-                    <Multiplier factor={e}/>
+                {attack_and_defense.defense && 
+                attack_and_defense.defense.map(e=>
+                    <Multiplier key={e + "defense"} factor={e}/>
                     
                     )}
             </div>

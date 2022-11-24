@@ -22,7 +22,7 @@ export const Card = styled.div`
         .card-img-waiting{
             animation:2s entering;
             transition:1s;
-            height:175px;
+            height:165px;
             /* background-color:black; */
         }
         img{

@@ -29,17 +29,17 @@ const filter = {
         value:"generation"
     }
   ]
-  async function getPokemonListFilter(url1){
-    let teste = await fetch(`https://pokeapi.co/api/v2/${url1}`)
-    let teste2 = await teste.json()
-    return teste2.results
-}
-export function Filter({firstFilterOptions, setFirstFilterOptions, setSecondFilterOptions}){
-    const orderName = filters.find(e => firstFilterOptions === e.value)
+//   async function getPokemonListFilter(url1){
+//     let teste = await fetch(`https://pokeapi.co/api/v2/${url1}`)
+//     let teste2 = await teste.json()
+//     return teste2.results
+// }
+export function Filter({firstFilterSelected, setFirstFilterSelected, setSecondFilterOptions}){
+    const orderName = filters.find(e => firstFilterSelected === e.value)
    
     const [isMenuOpened, setIsMenuOpened] = useState(false) 
     function selectOption(option){
-        setFirstFilterOptions(option)
+        setFirstFilterSelected(option)
         
         setIsMenuOpened(!isMenuOpened)
     }

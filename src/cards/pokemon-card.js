@@ -8,11 +8,11 @@ import "./../card-colors2.css"
 import {Link} from "react-router-dom"
 import { Card } from "./styles"
 
-async function getPokemon(pokemon){
-    let teste = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemon)
-    let teste2 = await teste.json()
-    return teste2
-}
+// async function getPokemon(pokemon){
+//     let teste = await fetch("https://pokeapi.co/api/v2/pokemon/" + pokemon)
+//     let teste2 = await teste.json()
+//     return teste2
+// }
 export default function Thumb({pokemon}){
     const [isLoading, setIsLoading] = useState(true)
     return(
@@ -20,10 +20,10 @@ export default function Thumb({pokemon}){
     <Card>
         <Link 
             to={`/${pokemon.name}`} 
-            className={pokemon?.types[0].type.name}
+            className={pokemon.types[0]}
             >
 
-            {/* <span className="pokemon-id">#{pokemon.id}</span> */}
+            <span className="pokemon-id">#{pokemon.id}</span>
             <div className={`card-img ${isLoading ? "card-img-waiting" : null}`}>
                 <img src={pokemon.photo} alt="ta chegando"
                 // style={isLoading ? { backgroundColor:"grey", display: 'none' } : {}  }
@@ -33,11 +33,11 @@ export default function Thumb({pokemon}){
 
             <h4>{pokemon.name}</h4>
             <div className="type-container">
-                {pokemon?.types?.map(poke=>
+                {pokemon?.types?.map(type=>
                     <span 
-                    key={pokemon.name + poke.type.name + "card-photo"}
-                    className={`type type-${poke.type.name}`}
-                    >{poke.type.name}</span>
+                    key={pokemon.name + type + "card-photo"}
+                    className={`type type-${type}`}
+                    >{type}</span>
                     )}
             </div>
         </Link>

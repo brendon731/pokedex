@@ -1,9 +1,6 @@
 import {useState} from "react"
 const filterOptions = [
-    {
-        name:"",
-        value:""
-    },
+   
     {
         name:"Lowest to Highest number",
         value:"L-H"
@@ -27,7 +24,7 @@ const filterOptions = [
     
 ]
 export function Ordenator({setOrder, order}){
-    const orderName = filterOptions.find(e => e.value === order)
+    const orderName = filterOptions.find(e => e.value === order) || filterOptions[0]
    
     const [isMenuOpened, setIsMenuOpened] = useState(false) 
     function selectOption(option){
