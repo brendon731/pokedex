@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react"
 import { pokemons } from "../../pokemonnames"
-import { Container, List } from "./styles"
+import { Container } from "./styles"
 
 export function Searcher({setSearch, search, searchPokemon}){
     const [searchList, setSearchList] = useState([])
@@ -28,13 +28,10 @@ export function Searcher({setSearch, search, searchPokemon}){
                     setSearch(evt.target.value) }  
                 }
                     />
-                <button onClick={()=>{
-                    searchPokemon(search)
-
-                }}>Pesquisar</button>
+                
                 {
                     searchList.length?
-                    <ul>
+                    <ul className="search__list">
                         {searchList.map(e=>(
                             <li 
                             key={e.name + "search"}
@@ -46,6 +43,10 @@ export function Searcher({setSearch, search, searchPokemon}){
                     </ul>:null
                     }
             </div>
+            <button onClick={()=>{
+                    searchPokemon(search)
+
+                }}>Pesquisar</button>
         </Container>
     )
 }
