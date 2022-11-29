@@ -49,10 +49,11 @@ function App() {
 
   const [fetchedAll, setFetchedAll] = useState(false)
 
-  function testSearch(title){
+  function testSearch(name){
+    console.log(search, name)
     if(!search) return true
     const regex = new RegExp(search, "i")
-    return regex.test(title)
+    return regex.test(name)
   }
   
   function increaseAmount(){
@@ -63,7 +64,8 @@ function App() {
     setAmount(amount + INCREASEAMOUNT)
 
     if(newList.length < INCREASEAMOUNT){
-      setFetchedAll(true)}
+      setFetchedAll(true)
+    }
     
   }
   
@@ -85,91 +87,7 @@ function App() {
     }
   
   }
-  // useEffect(()=>{
-  //   let newList = []
-  //   // console.log(fetchedAll)
-  //   if(fetchedAll){
-  //     newList = 
-  //     typeOfOrder([...pokemonList], order)
-  //     .filter( ({ name }) => testSearch(name) )
-
-  //     setPokemonList([...newList])
-
-  //   }else{
-  //       newList = typeOfOrder([...pokemons_card], order)
-  //       .filter( ({ name }) => testSearch(name) )
-  //       .slice(0, INCREASEAMOUNT)
-
-  //       // setAmount(INCREASEAMOUNT)
-  //       setPokemonList([...newList])
-  //   }
-    
-  // },[order])
   
-// useEffect(()=>{
-//     (async()=>{
-//       if(firstFilterSelected){
-
-//           let data = await getPokemonListFilter(firstFilterSelected)
-//           setSecondFilterOptions(data)
-          
-//         }else{
-
-//           const newList = typeOfOrder(pokemons_card, order)
-//           .filter( ({ name }) => testSearch(name) )
-//           .slice(0, INCREASEAMOUNT)
-
-//           // setAmount(INCREASEAMOUNT)
-//           setPokemonList([...newList])
-//           setSecondFilterOptions([])
-//           setFetchedAll(false)
-
-
-//         }
-//         setSelectedFilter(``)
-//     })()
-//   },[firstFilterSelected])
-
-//   useEffect(()=>{
-//     (async()=>{
-//       if(selectedFilter){
-//         setIsLoading(true)
-//         let data = await getPokemonListFiltered(firstFilterSelected, selectedFilter)
-//         let data2 = data.map(e=>e.name)
-//         let ordered = pokemons_card.filter(({ name }) => testSearch(name) && data2.includes(name))
-//         // setAmount(
-//         setPokemonList(typeOfOrder(ordered, order))
-//         setFetchedAll(true)
-//       }
-      
-//       setIsLoading(false)
-//     })()
-//   },[selectedFilter])
-
-  // async function searchPokemon(){
-  //   setIsLoading(true)
-  //   if(firstFilterSelected && selectedFilter){
-      
-  //     let data = await getPokemonListFiltered(firstFilterSelected, selectedFilter)
-  //     let names = data.map(e=>e.name)
-  //     let ordered = pokemons_card.filter(({ name }) => testSearch(name) && names.includes(name))
-  //     setPokemonList(typeOfOrder(ordered, order))
-
-  //     // newList = pokemonList.filter(({name}) => testSearch(name)) 
-  //   }else{
-
-  //     setFetchedAll(false)
-  //     let newList = typeOfOrder(pokemons_card, order) 
-  //     .filter(({name}) => testSearch(name))
-  //     .slice(0, INCREASEAMOUNT)
-  //     // setAmount(INCREASEAMOUNT)
-  //     setPokemonList(typeOfOrder(newList, order))
-  //   }
-  //   setIsLoading(false)
-
-
-
-  // }
 
   return(
     <>
@@ -184,6 +102,8 @@ function App() {
         pokemonList={pokemonList}
         setPokemonList={setPokemonList}
         setIsLoading={setIsLoading}
+        search={search}
+        setSearch={setSearch}
         
         />
         {/* 
@@ -221,17 +141,24 @@ function App() {
 
           {isLoading?
           <Loader/>:
-          pokemonList.length && pokemonList.map(pokemon=>
-            (<Thumb 
-            className="card"
-            key={pokemon.name}
-            pokemon={pokemon}
-            />)
-            )
-            }
+            <>
+            {pokemonList.length && pokemonList.map(pokemon=>
+              (<Thumb 
+                className="card"
+                key={pokemon.name}
+                pokemon={pokemon}
+                />)
+                )}
+                <div className="card"></div>
+                <div className="card"></div>
+                <div className="card"></div>
+                </>
+                
+                
+              }
         </div>
           
-      {!fetchedAll && <div onClick={increaseAmount}>carregar mais</div>}
+      {!fetchedAll && <button className="load-more" onClick={increaseAmount}>carregar mais</button>}
       </div>
       </>
   )}

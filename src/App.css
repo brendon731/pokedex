@@ -10,6 +10,9 @@ body{
     /* overflow-x:hidden; */
     font-family:Arial, Helvetica, sans-serif;
 }
+button:hover{
+    cursor:pointer;
+}
 a{
     text-decoration: none;
 }
@@ -50,10 +53,7 @@ li{
 .card-container .card:nth-child(even){
     animation:even 750ms forwards;
 }
-.card{
-    animation:2s entering;
-    transition:1s;
-}
+
 @keyframes entering {
     0%{
         opacity:0;
@@ -64,232 +64,21 @@ li{
     
 }
 
-/* 
-header{
-  
-    width:100%;
-    z-index:2;
-    position: -webkit-sticky;
-    position:sticky;
-    top:0;
-}
-fieldset{
-    border:1px solid white !important;
-}
-fieldset legend{
-    float:none;
-    width:auto;
-    margin:0 10px;
-    font-size:15px;
-}
-select{
-    font-size:16px;
-    margin:5px;
-} */
-
-
-/* .pokemon-id{
-    color:rgb(70, 70, 70);
-    font-weight: 500;
-    font-size: 14px;
-    line-height:.8em;
-    display:block;
-} */
 .card-container{
     max-width:980px;
     margin:auto;
-    
-}
-
-/* a{
-    text-decoration: none !important;
-    color:black !important;
-}
-p{
-    margin:0 !important;
-}
-
-span{
-    font-weight:400;
-}
-ul{
-    padding:0  !important;
-    margin:0 !important;
-}
-ul li{
-    list-style:none;
-    display:inline-block;
-    
-} */
-
-
-
-.card-container{
     display:flex;
     flex-wrap:wrap;
-}
-
-/*
-.animation-running{
-    
-    animation:piscar 1s infinite linear;
-
-}
-@keyframes piscar{
-    50%{
-        background-color:rgb(243, 243, 109);
-    box-shadow:2px 2px 20px yellow;
-
-    }
-}
-.first-half span:hover{
-    cursor:pointer;
-}
-
-.header-container{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    height:100%;
-    transition:.5s;
-}
-.first-half, .second-half{
-    height:50%;
-    padding:15px;
-}
-
-.fa-bars{
-    font-size: 24px;
-}
-
-.search-button, .search input{
-    padding:5px 7px;
-    display:inline-block;
-}
-.search-input-and-button{
-    width:100%;
-    display:flex;
-    max-width: 300px;
-}
-.search{
-    display:inline-block;
-    position:relative;
-    flex-grow:1;
-}
-.search input{
-    border:none;
-    outline:black;
-    background-color: rgba(0, 0, 0, 0.178);
-    width:100%;
-}
-
-
-.search-button{
-    border:none;
-    border-radius:0 5px 5px 0;
-}
-
-#search-history{
-    height:0;
-    transition:.2s;
-    overflow:hidden;
-    position:absolute;
-    width:100%;
-    z-index:10;
     
 }
-#search-history ul li{
-    display:block;
-    padding:5px;
-    cursor:pointer;
+.card{
+    min-width:175px;
+    flex:1;
+    margin:.5rem;
 }
-  
-#search-history ul li:hover{
-    background-color:rgb(211, 211, 211);
-}
-.search input:focus~#search-history{
-    width:100%;
-    height:fit-content;
-    max-height:250px;
-    background-color:black;
-    overflow-y:scroll;
-    color:grey;
-}
-#search-history::-webkit-scrollbar {
-    background: grey; 
-    width:10px;
-  }
-#search-history::-webkit-scrollbar-thumb {
-    background: rgb(61, 61, 61); 
-    border-radius:10px;
-  }
- 
-.filter{
-    background-color:rgb(230, 230, 230);
-    color:rgb(0, 0, 0);
-    padding:5px;
-    border-radius:5px;
-    border:none;
-
-}
-
-.second-half{
-    background-color:white;
-
-}
-.ordered, .filters-container{
-    display:inline-block;
-}
-.ordered{
-    float:right;
-}
-.closed {
-    height:100px;
-
-}
-.fa-bars{
-    display:none;
-}
-
-.closed .fa-bars{
-    display:inline-block;
-
-}
-
-.closed .header-container{ 
-    height:0;
-    display:none;
-
-}
-
-
-@media screen and (max-width:550px){
-    .header-container{
-        justify-content: space-around;
-        padding:15px 0 10px;
-
-    }
-    .header-container .logo{
-        margin-bottom:10px;
-    }
-    .first-half{
-        padding:10px 0 20px;
-
-    }
-    .second-half{
-        padding:0;
-    }
-    .filters-container, .ordered{
-        padding:10px 0;
-
-    }
-    
-    
-    
-}*/
 .load-more{
-    margin:20px auto;
+    margin:.5rem auto 2rem;
+    width:fit-content;
     display:block;
     padding:10px 15px;
     background-color: red;
@@ -298,3 +87,6 @@ ul li{
     border:none;
     border-radius:10px;
 } 
+.load-more:hover{
+    filter:grayscale(.5);
+}

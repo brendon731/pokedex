@@ -5,7 +5,8 @@ import styled from "styled-components"
 export const Container = styled.div`
     display:flex;
     .search__container{
-        width:250px;
+        max-width:250px;
+        width:100%;
         position:relative;
 
         input{
@@ -22,7 +23,9 @@ export const Container = styled.div`
             width:calc(100%);
             height:250px;
             overflow-y:scroll;
-            top:25px;
+            z-index:10;
+            bottom:0;
+            transform:translateY(100%);
             position:absolute;
             background-color: white;
             li{

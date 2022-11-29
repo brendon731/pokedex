@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
+import { Filters } from "../filters"
 
 
 
 export function SecondFilter({setSelectedFilter, selectedFilter, optionsList}){
-    useEffect(()=>{console.log("renderizouuuu")},[])
 
     const [isMenuOpened, setIsMenuOpened] = useState(false)
     
@@ -14,11 +14,10 @@ export function SecondFilter({setSelectedFilter, selectedFilter, optionsList}){
         setIsMenuOpened(!isMenuOpened)
     }
     return(<>
-    <div>
+    <Filters>
 
         <button onClick={()=>setIsMenuOpened(!isMenuOpened)}>{selectedFilter || "select one"}</button>
         {isMenuOpened && 
-        <div>
             <ul>
                 {optionsList.map(option=>
                 <li key={option.name}
@@ -26,12 +25,8 @@ export function SecondFilter({setSelectedFilter, selectedFilter, optionsList}){
                 >{option.name}</li>
                 )}
             </ul>
-        </div>
         }
-        </div>
-
-
-        
+        </Filters>
         </>
     )
 }

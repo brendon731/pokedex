@@ -1,4 +1,6 @@
 import {useState} from "react"
+import { Filters } from "../filters"
+import {ReactComponent as SortIcon} from "../../assets/sort.svg"
 const filterOptions = [
    
     {
@@ -32,20 +34,19 @@ export function Ordenator({setOrder, order}){
         setIsMenuOpened(!isMenuOpened)
     }
     return(
-        <div>
-
-            <button onClick={()=>setIsMenuOpened(!isMenuOpened)}>{orderName.name || "ordenar por"}</button>
+        <Filters>
+            <button onClick={()=>setIsMenuOpened(!isMenuOpened)}>{orderName.name || "ordenar por"}
+            <SortIcon/>
+            </button>
             {isMenuOpened && 
-            <div>
-                <ul>
+                <ul className="list">
                     {filterOptions.map(option=>
                     <li key={option.value}
                     onClick={()=> selectOption(option.value)}
                     >{option.name}</li>
                     )}
                 </ul>
-            </div>
             }
-        </div>
+        </Filters>
     )
 }

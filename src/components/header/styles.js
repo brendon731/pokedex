@@ -2,12 +2,32 @@ import styled from "styled-components";
 
 
 export const Head = styled.div`
+    position:relative;
+    
+    &:after{
+        
+        content:"";
+        display:block;
+        position:absolute;
+        left:50%;
+        top:50px;
+        transform:translate(-50%);
+        height:45px;
+        width:45px;
+        border:5px solid black;
+        background-color:white;
+        border-radius:50%;
+        
+
+    }
     .container{
         width:100%;
         max-width:960px;
-        /* border:1px solid black; */
         margin:auto;
+        align-items:center;
         display:flex;
+        justify-content: space-between;
+        flex-wrap:wrap;
     }
     
     .first_half{
@@ -40,6 +60,10 @@ export const Head = styled.div`
     .first_half, .second_half{
         height:50%;
         padding:15px;
+        min-height:5rem;
+        align-items:center;
+        display:flex;
+        
     }
     .second_half{
          background-color:white;

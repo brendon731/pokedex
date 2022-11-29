@@ -4,7 +4,6 @@ import { Ordenator } from "../ordenator"
 import { Filter } from "../filter"
 import { SecondFilter } from "../secondFilter";
 import pokemons_card from "../../data-pokemon-card.json"
-// import styles from "./header.modules.css"
 import {Head} from "./styles"
 const INCREASEAMOUNT = 20
 
@@ -16,14 +15,16 @@ export function Header(
     pokemonList,
     setPokemonList,
     setIsLoading,
-    setOrder
+    setOrder,
+    search, 
+    setSearch
 }
      ){
 
     const [firstFilterSelected, setFirstFilterSelected] = useState("")
     const [secondFilterOptions, setSecondFilterOptions] = useState([])
     const [selectedFilter, setSelectedFilter] = useState("")
-    const [search, setSearch] = useState("")
+    // const [search, setSearch] = useState("")
 
     async function getPokemonListFiltered(url, category){
         let teste = await fetch(`https://pokeapi.co/api/v2/${url}/${category}`,{
@@ -135,6 +136,7 @@ export function Header(
 
         <div className="first_half">
             <div className="container">
+            <div>teste</div>
                 <Searcher 
                 setSearch={setSearch} 
                 search={search}
@@ -145,6 +147,7 @@ export function Header(
         <div className="second_half">
             
             <div className="container">
+             <div>
 
                 <Filter
                 firstFilterSelected={firstFilterSelected}
@@ -158,6 +161,7 @@ export function Header(
                 selectedFilter={selectedFilter}
                 optionsList={secondFilterOptions}
                 />}
+              </div>
                 <Ordenator
                 order={order}
                 setOrder={setOrder}

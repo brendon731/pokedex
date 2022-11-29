@@ -1,5 +1,6 @@
 import {useState} from "react"
-
+import { Filters } from "../filters"
+import {ReactComponent as FilterIcon} from "../../assets/filter.svg"
 const filter = {
     all:"pokemon-species",
     shape:"pokemon-shape",
@@ -9,7 +10,7 @@ const filter = {
   }
   const filters = [
     {
-        name:"all",
+        name:"All",
         value:""
     },
     {
@@ -45,11 +46,12 @@ export function Filter({firstFilterSelected, setFirstFilterSelected, setSecondFi
     }
     
     return(
-        <div>
+        <Filters>
 
-            <button onClick={()=>setIsMenuOpened(!isMenuOpened)}>{orderName?.name || "All"}</button>
+            <button onClick={()=>setIsMenuOpened(!isMenuOpened)}>{orderName?.name || "All"}
+            <FilterIcon/>
+            </button>
             {isMenuOpened && 
-            <div>
                 <ul>
                     {filters.map(option=>
                     <li key={option.value}
@@ -57,8 +59,7 @@ export function Filter({firstFilterSelected, setFirstFilterSelected, setSecondFi
                     >{option.name}</li>
                     )}
                 </ul>
-            </div>
             }
-        </div>
+        </Filters>
     )
 }
