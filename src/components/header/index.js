@@ -27,23 +27,23 @@ export function Header(
     // const [search, setSearch] = useState("")
 
     async function getPokemonListFiltered(url, category){
-        let teste = await fetch(`https://pokeapi.co/api/v2/${url}/${category}`,{
+        let dara = await fetch(`https://pokeapi.co/api/v2/${url}/${category}`,{
         mode:"cors"
         })
-        let teste2 = await teste.json()
-        if(teste2.pokemon){
-        return teste2.pokemon.map(e=>e.pokemon)
+        let json = await dara.json()
+        if(json.pokemon){
+        return json.pokemon.map(e=>e.pokemon)
         }
-        if(teste2.pokemon_species)return teste2.pokemon_species
+        if(json.pokemon_species)return json.pokemon_species
     }
     async function getPokemonListFilter(url){
-        let teste = await fetch(`https://pokeapi.co/api/v2/${url}`, {
+        let data = await fetch(`https://pokeapi.co/api/v2/${url}`, {
         headers:{
             mode:"cors"
         }
         })
-        let teste2 = await teste.json()
-        return teste2.results
+        let json = await data.json()
+        return json.results
     }
     
     function testSearch(title){
@@ -80,7 +80,7 @@ export function Header(
             
           }else{
   
-            const newList = typeOfOrder(pokemons_card, order)
+            const newList = typeOfOrder([...pokemons_card], order)
             .filter( ({ name }) => testSearch(name) )
             .slice(0, INCREASEAMOUNT)
   
@@ -99,8 +99,8 @@ export function Header(
         if(selectedFilter){
           setIsLoading(true)
           let data = await getPokemonListFiltered(firstFilterSelected, selectedFilter)
-          let data2 = data.map(e=>e.name)
-          let ordered = pokemons_card.filter(({ name }) => testSearch(name) && data2.includes(name))
+          let names = data.map(e=>e.name)
+          let ordered = pokemons_card.filter(({ name }) => testSearch(name) && names.includes(name))
           setPokemonList(typeOfOrder(ordered, order))
           setFetchedAll(true)
         }
@@ -136,7 +136,7 @@ export function Header(
 
         <div className="first_half">
             <div className="container">
-            <div>teste</div>
+            <div className="container__logo"><img src="pokeapi.png"/></div>
                 <Searcher 
                 setSearch={setSearch} 
                 search={search}

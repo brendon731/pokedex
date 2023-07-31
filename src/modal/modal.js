@@ -10,6 +10,9 @@ import About from "./about/about.js"
 
 import {useParams, useNavigate} from "react-router-dom"
 import { Loader } from "../components/pokeballLoader"
+
+import {ReactComponent as CloseIcon} from "../assets/x.svg"
+
 function GetEnglishText(param){
     let text = param.filter(l=>l.language.name==="en").map(e=>e.flavor_text)
   return text[0]
@@ -64,33 +67,39 @@ export default function Example() {
   useEffect(()=>{
     console.log(pokemon)
   },[pokemon])
-  if(!isPokemonFound)return <div 
+  if(!isPokemonFound)return
+  
+   <div 
   className="modal"
   style={{backgroundImage:`url(pokemonwall.png)`, backgroundSize:"contain", backgroundColor:"black"}}
 
   >
     <div className="modal__header">
+
             <button
             onClick={()=>navigate("/")}
-            >close</button>
+            >
+              <CloseIcon/>
+            </button>
           </div>
-    404 not found</div>
+    404 not found
+    </div>
   return (
     <>
     
       <div
         className="modal"
       
-        style={{backgroundImage:`url(pokemonwall.png)`, 
-        backgroundSize:"cover",
-        backgroundRepeat:"no-repeat", 
-        backgroundColor:"black"}}
+        style={{backgroundImage:`url(pokemonwall.png)` 
+        }}
       >
         
           <div className="modal__header">
             <button
             onClick={()=>navigate("/")}
-            >close</button>
+            >
+            <CloseIcon/>
+            </button>
           </div>
           {pokemon?
             <div className="modal__container">

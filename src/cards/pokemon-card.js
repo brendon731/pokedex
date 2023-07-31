@@ -14,7 +14,7 @@ import { Card } from "./styles"
 //     return teste2
 // }
 export default function Thumb({pokemon}){
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoaded, setIsLoaded] = useState(false)
     return(
     <>
     <Card>
@@ -24,10 +24,10 @@ export default function Thumb({pokemon}){
             >
 
             <span className="pokemon-id">#{pokemon.id}</span>
-            <div className={`card-img ${isLoading ? "card-img-waiting" : null}`}>
-                <img src={pokemon.photo} alt="ta chegando"
-                // style={isLoading ? { backgroundColor:"grey", display: 'none' } : {}  }
-                onLoad={() => setIsLoading(false)}
+            
+            <div className={`card-img ${isLoaded ? "card-loaded" : "card-waiting"}`}>
+                <img src={pokemon.photo} alt={pokemon.name}
+                onLoad={() => setIsLoaded(true)}
                 />
             </div>
 
@@ -41,7 +41,7 @@ export default function Thumb({pokemon}){
                     )}
             </div>
         </Link>
-    </Card>        
+    </Card> 
     </>)
 
 }

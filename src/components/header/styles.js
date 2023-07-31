@@ -28,6 +28,12 @@ export const Head = styled.div`
         display:flex;
         justify-content: space-between;
         flex-wrap:wrap;
+        .container__logo{
+            height:50px;
+            img{
+                height:100%;
+            }
+        }
     }
     
     .first_half{

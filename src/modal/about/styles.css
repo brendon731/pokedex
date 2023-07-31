@@ -5,7 +5,10 @@
 .about__text{
     text-align:center;
     display:block;
-    margin-bottom:1rem;
+    
+}
+.about li, .about p{
+    margin-bottom:.7em;
 }
 
 

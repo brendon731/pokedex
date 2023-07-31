@@ -41,34 +41,13 @@ li{
 
     }
 }
+
 .card-container{
     display:flex;
     flex-wrap:wrap;
     justify-content: space-around;
-}
-.card-container .card:nth-child(odd){
-    animation:odd 750ms forwards;
-}
-
-.card-container .card:nth-child(even){
-    animation:even 750ms forwards;
-}
-
-@keyframes entering {
-    0%{
-        opacity:0;
-    }
-    100%{
-        opacity:1;
-    }
-    
-}
-
-.card-container{
     max-width:980px;
     margin:auto;
-    display:flex;
-    flex-wrap:wrap;
     
 }
 .card{

@@ -15,10 +15,7 @@ export const Card = styled.div`
             background-size: 75%;
         }
         .card-img-waiting{
-            animation:2s entering;
-            transition:1s;
             height:130px;
-            /* background-color:black; */
         }
         img{
             width:90%;
